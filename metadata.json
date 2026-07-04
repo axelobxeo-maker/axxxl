@@ -1,0 +1,6 @@
+{
+  "name": "AXELUF DOWNLOAD WEB",
+  "description": "A feature-rich Neobrutalist custom dashboard and mod-sharing web application for downloading and managing custom layouts, skins, and gaming utilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
