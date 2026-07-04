@@ -1,5 +1,24 @@
 import React from 'react';
 import { motion, HTMLMotionProps } from 'motion/react';
+import { Link } from 'lucide-react';
+
+export function ShareButton() {
+  const handleCopy = () => {
+    navigator.clipboard.writeText('https://axeluf.portal/download-mod-slug');
+    alert('Copied!');
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="bg-[#D4FF00] border-2 border-black text-black px-3 py-1.5 text-[10px] sm:text-xs font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none rounded-lg"
+    >
+      <Link strokeWidth={2.5} className="w-3.5 h-3.5 shrink-0" />
+      <span>SHARE</span>
+      <span className="bg-white border border-black px-1.5 py-0.5 text-[8px] rounded font-bold tracking-wider shrink-0">MULTI</span>
+    </button>
+  );
+}
 
 interface CardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;

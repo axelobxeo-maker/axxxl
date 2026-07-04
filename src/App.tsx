@@ -54,7 +54,8 @@ import {
   Chrome,
   Smartphone,
   Laptop,
-  Send
+  Send,
+  Users
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import {
@@ -183,7 +184,7 @@ export default function App() {
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
 
   // Interactive Premium Features States
-  const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'mods' | 'friends'>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [session, setSession] = useState<any>(null);
@@ -1337,6 +1338,21 @@ export default function App() {
         style={{ width: `${scrollProgress}%` }}
       />
 
+      {/* NEW HEADER NAVBAR */}
+      <Navbar
+        webTitle={webTitle}
+        onOpenSidebar={() => {
+          playSynth('click');
+          setIsSidebarOpen(true);
+        }}
+        currentTab={currentTab}
+        setCurrentTab={(tab) => {
+          playSynth('click');
+          setCurrentTab(tab);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+
       {/* BANNER RECOVERY SCREEN */}
       {isBanned && (
         <div className="fixed inset-0 bg-[#2E8B6E] z-[99999] flex flex-col items-center justify-center p-4 text-center select-none text-white">
@@ -1374,17 +1390,6 @@ export default function App() {
         </div>
       )}
 
-      {/* FLOATING SIDEBAR MENU BUTTON */}
-      <button
-        onClick={() => {
-          playSynth('click');
-          setIsSidebarOpen(true);
-        }}
-        className="fixed bottom-5 right-5 bg-[#CCFF00] hover:bg-[#A3E600] text-black border-3 border-black w-12 h-12 rounded-xl flex items-center justify-center brutal-shadow-sm hover:translate-y-[-2px] active:translate-y-1 transition-all z-[99] cursor-pointer"
-        title="Buka Menu Sidebar"
-      >
-        <Menu className="w-6 h-6 text-black" />
-      </button>
 
       {/* SIDEBAR DRAWER PANEL */}
       <Sidebar
@@ -1798,20 +1803,6 @@ export default function App() {
           />
         )}
 
-        {/* FLOATING ACTION FLOATING BUTTONS (FAB) */}
-        <div className="fixed bottom-4 left-4 z-50 flex flex-col gap-2">
-          {/* Scroll progress and scroll to top button */}
-          <button
-            onClick={() => {
-              playSynth('click');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="w-9 h-9 sm:w-10 sm:h-10 bg-[#4CCD99] border-2 sm:border-3 border-black text-black font-extrabold flex items-center justify-center rounded-xl shadow-[2px_2px_0_0_#000000] hover:translate-y-[-2px] hover:shadow-[3px_3px_0_0_#000000] active:translate-y-1 transition-all"
-            title="Kembali Ke Atas"
-          >
-            ▲
-          </button>
-        </div>
 
         {/* FOOTER & SOCIAL LINKS */}
         <motion.footer
@@ -1893,59 +1884,6 @@ export default function App() {
 
         </motion.footer>
 
-        {/* BOTTOM NAVIGATION BAR (Neo-Brutalist floating pill style) */}
-        {!(currentPath.includes('/logy') || currentPath.includes('#logy')) && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-lg z-[999] bg-white border-3 border-black rounded-full py-2 px-3 sm:py-2.5 sm:px-4 shadow-[4px_4px_0px_0px_#000000]">
-            <div className="flex items-center justify-around gap-1">
-              {/* MENU TAB */}
-              <button
-                onClick={() => {
-                  playSynth('click');
-                  setIsSidebarOpen(true);
-                }}
-                className="flex items-center gap-1 px-2.5 py-1.5 text-black font-extrabold uppercase text-[10px] cursor-pointer hover:bg-black/5 rounded-full transition-colors shrink-0"
-              >
-                <Menu className="w-4 h-4 text-black" />
-                <span className="hidden sm:inline">MENU</span>
-              </button>
-
-              {/* HOME TAB */}
-              <button
-                onClick={() => {
-                  playSynth('click');
-                  setCurrentTab('home');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
-                  currentTab === 'home'
-                    ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
-                    : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
-                }`}
-              >
-                <Home className="w-4 h-4 text-black" />
-                <span>HOME</span>
-              </button>
-
-              {/* MOD TAB */}
-              <button
-                onClick={() => {
-                  playSynth('click');
-                  setCurrentTab('mods');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
-                  currentTab === 'mods'
-                    ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
-                    : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
-                }`}
-              >
-                <Gamepad2 className="w-4 h-4 text-black" />
-                <span>MOD</span>
-              </button>
-
-            </div>
-          </div>
-        )}
         <audio ref={audioRef} style={{ display: 'none' }} />
       </div>
     </div>

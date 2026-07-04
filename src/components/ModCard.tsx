@@ -93,6 +93,7 @@ export default function ModCard({
     try {
       await navigator.clipboard.writeText(fullLink);
       setCopiedLink(true);
+      alert('Copied!');
       setTimeout(() => setCopiedLink(false), 2000);
     } catch (err) {
       console.error("Failed to copy link:", err);
@@ -167,6 +168,7 @@ export default function ModCard({
     <motion.div
       initial={{ opacity: 0, y: 50, rotateX: 5, transformPerspective: 1000 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      whileHover={{ rotate: -1, scale: 1.01 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="brutal-card overflow-hidden flex flex-col"
@@ -436,11 +438,6 @@ export default function ModCard({
             <div className="border-t border-dashed border-black pt-2.5 flex flex-wrap justify-between items-center text-[9px] font-bold text-gray-500 gap-2">
               <div className="flex items-center gap-2">
                 <span className="flex items-center gap-1 font-mono">
-                  <Eye className="w-3.5 h-3.5 text-gray-400" />
-                  <span>{mod.views || 0} VIEWS</span>
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1 font-mono">
                   <Download className="w-3.5 h-3.5 text-gray-400" />
                   <span>{mod.downloads || 0} DOWNLOADS</span>
                 </span>
@@ -635,10 +632,11 @@ export default function ModCard({
               <span className="text-[8px] font-extrabold text-gray-500 uppercase">SHARE:</span>
               <button
                 onClick={handleCopyLink}
-                className="flex-1 bg-[#CCFF00] hover:bg-[#b8e500] border-2 border-black text-black px-2.5 py-1 text-[8px] sm:text-[9px] rounded-md font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none"
+                className="flex-1 bg-[#D4FF00] border-2 border-black text-black px-3 py-1.5 text-[10px] sm:text-xs font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none rounded-lg"
               >
-                <span>🔗 {copiedLink ? 'Tersalin! Siap Dibagikan' : 'SHARE MOD (1-Klik Copy & Share)'}</span>
-                <span className="text-[7px] text-gray-500 bg-white px-1 border border-black rounded font-mono font-bold">MULTI</span>
+                <Link strokeWidth={2.5} className="w-3.5 h-3.5 shrink-0" />
+                <span>SHARE</span>
+                <span className="bg-white border border-black px-1.5 py-0.5 text-[8px] rounded font-bold tracking-wider shrink-0">MULTI</span>
               </button>
             </div>
 
