@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Menu, ShieldAlert, Star } from 'lucide-react';
+import { Menu, ShieldCheck } from 'lucide-react';
 import Button from '../common/Button';
 
 interface NavbarProps {
@@ -26,7 +26,7 @@ export default function Navbar({
             onClick={onOpenSidebar}
             className="rounded-lg"
           >
-            <Menu className="w-4 h-4 text-black" />
+            <Menu strokeWidth={2.5} className="w-4 h-4 text-black" />
           </Button>
           <motion.h1
             initial={{ scale: 0.95 }}
@@ -39,16 +39,8 @@ export default function Navbar({
           </motion.h1>
         </div>
 
+        {/* Hiding admin button as requested to hide admin panel */}
         <div className="flex items-center gap-2">
-          <Button
-            variant={isAdminMode ? 'yellow' : 'white'}
-            size="sm"
-            onClick={onToggleAdmin}
-            className="text-[10px]"
-          >
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>{isAdminMode ? 'Admin Panel' : 'Masuk Admin'}</span>
-          </Button>
         </div>
       </div>
     </header>

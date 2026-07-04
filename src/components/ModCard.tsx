@@ -632,12 +632,12 @@ export default function ModCard({
 
             {/* Sharing Panel */}
             <div className="flex items-center gap-1.5 bg-zinc-100 p-2 border-2 border-black rounded-lg">
-              <span className="text-[8px] font-extrabold text-gray-500 uppercase">BAGIKAN MOD:</span>
+              <span className="text-[8px] font-extrabold text-gray-500 uppercase">SHARE:</span>
               <button
                 onClick={handleCopyLink}
                 className="flex-1 bg-[#CCFF00] hover:bg-[#b8e500] border-2 border-black text-black px-2.5 py-1 text-[8px] sm:text-[9px] rounded-md font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[-1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none"
               >
-                <span>🔗 {copiedLink ? 'Tersalin! Siap Dibagikan' : 'Bagikan Mod (1-Klik Copy & Share)'}</span>
+                <span>🔗 {copiedLink ? 'Tersalin! Siap Dibagikan' : 'SHARE MOD (1-Klik Copy & Share)'}</span>
                 <span className="text-[7px] text-gray-500 bg-white px-1 border border-black rounded font-mono font-bold">MULTI</span>
               </button>
             </div>

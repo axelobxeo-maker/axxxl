@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Home, Trophy, Award, Wrench, Activity, Sparkles, Folder } from 'lucide-react';
+import { Home, Trophy, Wrench, Activity, Sparkles, Folder, ShieldCheck } from 'lucide-react';
 import Button from '../common/Button';
 import Card from '../common/Card';
 
@@ -25,6 +25,15 @@ interface SidebarProps {
   isAdminMode: boolean;
   onToggleAdmin: () => void;
 }
+
+// IconWrapper: Neo-Brutalist box wrapper for sidebar icons
+const IconWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="bg-[#FFDE03] border-2 border-black p-1.5 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center shrink-0">
+      {children}
+    </div>
+  );
+};
 
 export default function Sidebar({
   isOpen,
@@ -58,7 +67,9 @@ export default function Sidebar({
       <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white text-black z-[1001] border-r-4 border-black shadow-[6px_0_0_0_#000000] flex flex-col rounded-tr-2xl rounded-br-2xl overflow-hidden animate-fade-in">
         <div className="p-4 bg-[#A3FFD6] border-b-3 border-black flex justify-between items-center shrink-0">
           <div className="flex items-center gap-2 font-bold text-black text-sm">
-            <Folder className="w-5 h-5 text-black" />
+            <IconWrapper>
+              <Folder strokeWidth={2.5} className="w-4 h-4 text-black" />
+            </IconWrapper>
             <h2 className="font-syne font-extrabold text-base uppercase tracking-tight">Portal Menu</h2>
           </div>
           <Button
@@ -79,12 +90,14 @@ export default function Sidebar({
                 onSelectCategory('');
                 onClose();
               }}
-              className={`w-full text-left p-2.5 border-2 border-black rounded-lg transition-all flex items-center justify-between uppercase ${
+              className={`w-full text-left p-2 border-2 border-black rounded-lg transition-all flex items-center justify-between uppercase ${
                 activeCategory === '' ? 'bg-[#FFD100] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'bg-zinc-50 hover:bg-[#A3FFD6]/30'
               }`}
             >
-              <div className="flex items-center gap-1.5">
-                <Home className="w-4 h-4 text-black" />
+              <div className="flex items-center gap-2">
+                <IconWrapper>
+                  <Home strokeWidth={2.5} className="w-4 h-4 text-black" />
+                </IconWrapper>
                 <span>Beranda / Semua Mod</span>
               </div>
               <span className="bg-black text-white px-2 py-0.5 text-[9px] border-2 border-black rounded">
@@ -99,12 +112,14 @@ export default function Sidebar({
                   onSelectCategory('BOOKMARKED');
                   onClose();
                 }}
-                className={`w-full text-left p-2.5 border-2 border-black rounded-lg transition-all flex items-center justify-between uppercase ${
+                className={`w-full text-left p-2 border-2 border-black rounded-lg transition-all flex items-center justify-between uppercase ${
                   activeCategory === 'BOOKMARKED' ? 'bg-[#FFD100] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'bg-yellow-50 hover:bg-yellow-100'
                 }`}
               >
-                <div className="flex items-center gap-1.5">
-                  <Trophy className="w-4 h-4 text-yellow-600 animate-bounce" />
+                <div className="flex items-center gap-2">
+                  <IconWrapper>
+                    <Trophy strokeWidth={2.5} className="w-4 h-4 text-black" />
+                  </IconWrapper>
                   <span>Bookmark Anda</span>
                 </div>
                 <span className="bg-black text-white px-2 py-0.5 text-[9px] border-2 border-black rounded">
@@ -115,8 +130,10 @@ export default function Sidebar({
 
             {/* Customizer Tema */}
             <Card variant="white" thickness="border-2" shadowSize="sm" hasHoverEffect={false} className="p-3 text-[10px]">
-              <h4 className="uppercase font-extrabold mb-2 text-black flex items-center gap-1.5">
-                <Wrench className="w-3.5 h-3.5" />
+              <h4 className="uppercase font-extrabold mb-3 text-black flex items-center gap-2">
+                <IconWrapper>
+                  <Wrench strokeWidth={2.5} className="w-4 h-4 text-black" />
+                </IconWrapper>
                 <span>Customizer Tema</span>
               </h4>
               <div className="space-y-2 text-[9px]">
@@ -181,8 +198,10 @@ export default function Sidebar({
 
             {/* Mini Game Tap Brutal */}
             <Card variant="white" thickness="border-2" shadowSize="sm" hasHoverEffect={false} className="p-3 text-center flex flex-col items-center">
-              <h4 className="text-[10px] text-black font-extrabold uppercase mb-1 flex items-center gap-1.5 justify-center">
-                <Activity className="w-3.5 h-3.5 text-black" />
+              <h4 className="text-[10px] text-black font-extrabold uppercase mb-2 flex items-center gap-2 justify-center">
+                <IconWrapper>
+                  <Activity strokeWidth={2.5} className="w-4 h-4 text-black" />
+                </IconWrapper>
                 <span>Mini Game Tap Brutal</span>
               </h4>
               <div className="flex justify-between items-center w-full bg-zinc-50 p-1.5 border border-black rounded mb-2 text-[9px] gap-2">
@@ -193,24 +212,15 @@ export default function Sidebar({
                 variant="yellow"
                 size="sm"
                 onClick={onEasterEggTap}
-                className="w-full text-[9px]"
+                className="w-full text-[9px] flex items-center justify-center gap-1.5"
               >
                 <span>Tap Disini!</span>
-                <Sparkles className="w-3.5 h-3.5" />
+                <Sparkles strokeWidth={2.5} className="w-3.5 h-3.5 text-black" />
               </Button>
             </Card>
           </div>
 
-          <div className="border-t-2 border-dashed border-black pt-3 mt-auto space-y-2">
-            <Button
-              variant={isAdminMode ? 'yellow' : 'white'}
-              size="sm"
-              fullWidth
-              onClick={onToggleAdmin}
-            >
-              <span>{isAdminMode ? 'Kembali ke User Portal' : 'Masuk Admin Panel'}</span>
-            </Button>
-          </div>
+          {/* Admin panel button hidden as requested */}
         </div>
       </div>
     </>

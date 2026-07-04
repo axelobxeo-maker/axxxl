@@ -1,0 +1,22 @@
+{
+  "name": "AXELUF Game Mod Portal",
+  "short_name": "AXELUF",
+  "description": "Portal game modifikasi terbaik dengan gaya Neo-Brutalisme.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FFDE03",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

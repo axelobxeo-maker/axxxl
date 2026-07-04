@@ -74,7 +74,6 @@ import Card from './components/common/Card';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import DashboardOverview from './features/dashboard/DashboardOverview';
-import Dashboard from './features/dashboard/Dashboard';
 
 const isVideoUrl = (url: string | undefined): boolean => {
   if (!url) return false;
@@ -184,7 +183,7 @@ export default function App() {
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
 
   // Interactive Premium Features States
-  const [currentTab, setCurrentTab] = useState<'home' | 'mods' | 'challenges'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [session, setSession] = useState<any>(null);
@@ -1774,11 +1773,6 @@ export default function App() {
               })()}
             </main>
           </>
-        ) : currentTab === 'challenges' ? (
-          <Dashboard
-            onSoundPlay={playSynth}
-            onShowToast={showToast}
-          />
         ) : (
           <DashboardOverview
             webTitle={webTitle}
@@ -1949,22 +1943,6 @@ export default function App() {
                 <span>MOD</span>
               </button>
 
-              {/* CHALLENGE TAB */}
-              <button
-                onClick={() => {
-                  playSynth('click');
-                  setCurrentTab('challenges');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
-                  currentTab === 'challenges'
-                    ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
-                    : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
-                }`}
-              >
-                <Trophy className="w-4 h-4 text-black" />
-                <span>QUEST</span>
-              </button>
             </div>
           </div>
         )}
