@@ -74,6 +74,7 @@ import Card from './components/common/Card';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import DashboardOverview from './features/dashboard/DashboardOverview';
+import Dashboard from './features/dashboard/Dashboard';
 
 const isVideoUrl = (url: string | undefined): boolean => {
   if (!url) return false;
@@ -183,7 +184,7 @@ export default function App() {
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
 
   // Interactive Premium Features States
-  const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'mods' | 'challenges'>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [session, setSession] = useState<any>(null);
@@ -1773,6 +1774,11 @@ export default function App() {
               })()}
             </main>
           </>
+        ) : currentTab === 'challenges' ? (
+          <Dashboard
+            onSoundPlay={playSynth}
+            onShowToast={showToast}
+          />
         ) : (
           <DashboardOverview
             webTitle={webTitle}
@@ -1783,8 +1789,8 @@ export default function App() {
             favorites={favorites}
             activeCategoryFilter={activeCategoryFilter}
             setActiveCategoryFilter={setActiveCategoryFilter}
-            currentTab={currentTab}
-            setCurrentTab={setCurrentTab}
+            currentTab={currentTab as any}
+            setCurrentTab={setCurrentTab as any}
             onLikeMod={handleLikeMod}
             onAddComment={handleAddComment}
             onRateMod={handleRateMod}
@@ -1895,18 +1901,18 @@ export default function App() {
 
         {/* BOTTOM NAVIGATION BAR (Neo-Brutalist floating pill style) */}
         {!(currentPath.includes('/logy') || currentPath.includes('#logy')) && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md z-[999] bg-white border-3 border-black rounded-full py-2.5 px-4 shadow-[4px_4px_0px_0px_#000000]">
-            <div className="flex items-center justify-around">
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-lg z-[999] bg-white border-3 border-black rounded-full py-2 px-3 sm:py-2.5 sm:px-4 shadow-[4px_4px_0px_0px_#000000]">
+            <div className="flex items-center justify-around gap-1">
               {/* MENU TAB */}
               <button
                 onClick={() => {
                   playSynth('click');
                   setIsSidebarOpen(true);
                 }}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 text-black font-extrabold uppercase text-[10px] cursor-pointer hover:bg-black/5 rounded-full transition-colors shrink-0"
+                className="flex items-center gap-1 px-2.5 py-1.5 text-black font-extrabold uppercase text-[10px] cursor-pointer hover:bg-black/5 rounded-full transition-colors shrink-0"
               >
                 <Menu className="w-4 h-4 text-black" />
-                <span>MENU</span>
+                <span className="hidden sm:inline">MENU</span>
               </button>
 
               {/* HOME TAB */}
@@ -1916,7 +1922,7 @@ export default function App() {
                   setCurrentTab('home');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`flex items-center gap-1.5 px-4 py-2 uppercase text-[10px] cursor-pointer transition-all ${
+                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
                   currentTab === 'home'
                     ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
                     : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
@@ -1933,7 +1939,7 @@ export default function App() {
                   setCurrentTab('mods');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`flex items-center gap-1.5 px-4 py-2 uppercase text-[10px] cursor-pointer transition-all ${
+                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
                   currentTab === 'mods'
                     ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
                     : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
@@ -1941,6 +1947,23 @@ export default function App() {
               >
                 <Gamepad2 className="w-4 h-4 text-black" />
                 <span>MOD</span>
+              </button>
+
+              {/* CHALLENGE TAB */}
+              <button
+                onClick={() => {
+                  playSynth('click');
+                  setCurrentTab('challenges');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`flex items-center gap-1 px-3 py-1.5 sm:py-2 sm:px-4 uppercase text-[10px] cursor-pointer transition-all ${
+                  currentTab === 'challenges'
+                    ? 'bg-theme-accent text-black border-2 border-black rounded-full shadow-[2px_2px_0px_0px_#000000] font-black'
+                    : 'text-zinc-500 font-extrabold hover:text-black hover:bg-black/5 rounded-full'
+                }`}
+              >
+                <Trophy className="w-4 h-4 text-black" />
+                <span>QUEST</span>
               </button>
             </div>
           </div>
