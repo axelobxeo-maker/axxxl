@@ -15,7 +15,6 @@ export function ShareButton() {
     >
       <Link strokeWidth={2.5} className="w-3.5 h-3.5 shrink-0" />
       <span>SHARE</span>
-      <span className="bg-white border border-black px-1.5 py-0.5 text-[8px] rounded font-bold tracking-wider shrink-0">MULTI</span>
     </button>
   );
 }
