@@ -628,15 +628,62 @@ export default function ModCard({
             )}
 
             {/* Sharing Panel */}
-            <div className="flex items-center gap-1.5 bg-zinc-100 p-2 border-2 border-black rounded-lg">
-              <span className="text-[8px] font-extrabold text-gray-500 uppercase">SHARE:</span>
-              <button
-                onClick={handleCopyLink}
-                className="flex-1 bg-[#D4FF00] border-2 border-black text-black px-3 py-1.5 text-[10px] sm:text-xs font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none rounded-lg"
-              >
-                <Link strokeWidth={2.5} className="w-3.5 h-3.5 shrink-0" />
-                <span>SHARE</span>
-              </button>
+            <div className="flex flex-col gap-2 bg-zinc-50 p-2.5 border-2 border-black rounded-lg">
+              <span className="text-[9px] font-black text-gray-500 uppercase block tracking-wider">Bagikan Modifikasi Ini:</span>
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full">
+                {/* Copy Link */}
+                <button
+                  onClick={handleCopyLink}
+                  className="bg-[#D4FF00] border-2 border-black text-black px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md"
+                >
+                  <Link strokeWidth={2.5} className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+                  <span>{copiedLink ? 'Copied!' : 'Copy'}</span>
+                </button>
+
+                {/* WhatsApp */}
+                <a
+                  href={whatsappShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#25D366] border-2 border-black text-black px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                >
+                  <span className="shrink-0 font-sans">🟢</span>
+                  <span>WhatsApp</span>
+                </a>
+
+                {/* Telegram */}
+                <a
+                  href={telegramShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#0088cc] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                >
+                  <span className="shrink-0 font-sans">🔵</span>
+                  <span>Telegram</span>
+                </a>
+
+                {/* Facebook */}
+                <a
+                  href={facebookShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#1877F2] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                >
+                  <span className="shrink-0 font-sans">👥</span>
+                  <span>Facebook</span>
+                </a>
+
+                {/* Twitter */}
+                <a
+                  href={twitterShare}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#1DA1F2] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase col-span-2 sm:col-span-1 flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                >
+                  <span className="shrink-0 font-sans">🐦</span>
+                  <span>Twitter</span>
+                </a>
+              </div>
             </div>
 
             {/* Discussion / Comment Section Panel */}

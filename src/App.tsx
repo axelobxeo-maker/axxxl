@@ -1377,7 +1377,7 @@ export default function App() {
 
       {/* TOAST NOTIFICATION CONTAINER */}
       {toast.show && (
-        <div className="fixed bottom-4 right-4 z-[9999] max-w-xs pointer-events-auto animate-bounce">
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:right-4 sm:translate-x-0 z-[9999] max-w-xs w-[90%] sm:w-auto pointer-events-auto transition-transform duration-300">
           <div
             className={`border-3 border-black p-3 font-bold text-xs flex items-center gap-2.5 text-black rounded-xl shadow-[4px_4px_0px_0px_#000000]`}
             style={{
