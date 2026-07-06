@@ -16,8 +16,8 @@ interface DashboardOverviewProps {
   favorites: number[];
   activeCategoryFilter: string;
   setActiveCategoryFilter: (cat: string) => void;
-  currentTab: 'home' | 'mods' | 'friends';
-  setCurrentTab: (tab: 'home' | 'mods' | 'friends') => void;
+  currentTab: 'home' | 'mods';
+  setCurrentTab: (tab: 'home' | 'mods') => void;
   onLikeMod: (index: number) => void;
   onAddComment: (index: number, name: string, text: string) => void;
   onRateMod: (index: number, score: number) => void;
@@ -167,16 +167,6 @@ export default function DashboardOverview({
             >
               Semua Mod
             </Button>
-            <Button
-              variant={currentTab === 'friends' ? 'accent' : 'white'}
-              size="sm"
-              onClick={() => {
-                soundPlay('click');
-                setCurrentTab('friends');
-              }}
-            >
-              Teman
-            </Button>
           </div>
         </div>
       </Card>
@@ -185,58 +175,8 @@ export default function DashboardOverview({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column (Main Content) */}
         <div className="lg:col-span-8 space-y-6">
-          {currentTab === 'friends' ? (
-            <Card variant="white" thickness="border-3" shadowSize="md" className="p-6">
-              <div className="border-b-4 border-black pb-3 mb-4">
-                <h3 className="font-syne font-black text-lg sm:text-xl uppercase flex items-center gap-2">
-                  <Users className="w-6 h-6 text-pink-500 shrink-0" strokeWidth={2.5} />
-                  <span>Komunitas & Teman Aktif</span>
-                </h3>
-                <p className="text-[10px] text-zinc-500 font-bold mt-1 uppercase">
-                  Temukan sesama gamer premium AXELUF di seluruh Indonesia!
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                {[
-                  { name: 'XyzGamer', status: 'Online', game: 'Genshin Impact Mod', avatarColor: 'bg-[#FF6B6B]' },
-                  { name: 'Rian_Pro', status: 'Offline', game: 'Mobile Legends Mod', avatarColor: 'bg-[#4CCD99]' },
-                  { name: 'Lia_Anya', status: 'Online', game: 'Minecraft Bedrock', avatarColor: 'bg-[#FFDE03]' },
-                  { name: 'Hanz_Dev', status: 'Mabar', game: 'GTA San Andreas Remaster', avatarColor: 'bg-[#FF71CD]' },
-                ].map((friend, idx) => (
-                  <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-zinc-50 border-2 border-black rounded-xl hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all duration-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full border-2 border-black ${friend.avatarColor} flex items-center justify-center font-syne font-black text-sm uppercase shadow-[2px_2px_0px_0px_#000000]`}>
-                        {friend.name[0]}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-syne font-black text-xs uppercase">{friend.name}</span>
-                          <span className={`text-[8px] font-extrabold px-1.5 py-0.5 rounded border border-black uppercase ${
-                            friend.status === 'Online' ? 'bg-[#4CCD99]' : friend.status === 'Mabar' ? 'bg-[#FFDE03]' : 'bg-gray-300'
-                          }`}>
-                            {friend.status}
-                          </span>
-                        </div>
-                        <div className="text-[10px] text-zinc-500 font-semibold mt-0.5">
-                          Sedang bermain: <span className="text-black font-bold uppercase">{friend.game}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => alert(`Mengirim undangan mabar ke @${friend.name}!`)}
-                      className="bg-white hover:bg-[#FFD100] border-2 border-black text-[9px] font-black uppercase px-2.5 py-1 rounded-lg transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px] cursor-pointer"
-                    >
-                      Ajak Mabar
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          ) : (
-            <>
-              {/* Bento Notification */}
-              <Card variant="accent" thickness="border-3" shadowSize="sm" className="p-4 bg-[#4CCD99] text-black">
+          {/* Bento Notification */}
+          <Card variant="accent" thickness="border-3" shadowSize="sm" className="p-4 bg-[#4CCD99] text-black">
                 <div className="flex gap-3 items-start">
                   <Bell className="w-5 h-5 text-black shrink-0 mt-0.5 animate-bounce" />
                   <div>
@@ -318,8 +258,6 @@ export default function DashboardOverview({
                 onRequestMod={onRequestMod}
                 onUpvoteRequest={onUpvoteRequest}
               />
-            </>
-          )}
         </div>
 
         {/* Right Column (Sidebar Information) */}

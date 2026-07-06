@@ -184,7 +184,7 @@ export default function App() {
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
 
   // Interactive Premium Features States
-  const [currentTab, setCurrentTab] = useState<'home' | 'mods' | 'friends'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [session, setSession] = useState<any>(null);
