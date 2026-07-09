@@ -23,6 +23,8 @@
   --shadow-offset-sm: 4px;
   --shadow-offset-lg: 8px;
   --custom-bg-image: none;
+  --current-text-color: #000000;
+  --current-text-secondary: #6b7280;
 }
 
 [data-theme="green"] {
@@ -59,14 +61,52 @@
   --card-bg: #1E1E24;
   --text-color: #FFFFFF;
   --border-color: #FFFFFF;
+  --current-text-color: #FFFFFF;
+  --current-text-secondary: #a1a1aa;
 }
 
-/* Smart Global Dark Theme overrides for hardcoded light classes */
+/* Override standard bg-white to card-bg under dark theme */
 [data-theme="dark"] .bg-white:not(button):not(a):not(.bg-theme-accent):not([class*="bg-[#"]):not([class*="bg-emerald"]):not([class*="bg-green"]):not([class*="bg-yellow"]):not([class*="bg-pink"]):not([class*="bg-amber"]):not([class*="bg-orange"]) {
   background-color: var(--card-bg) !important;
 }
 
-/* Default text elements in dark theme are white (not important so they can be overridden easily) */
+/* Light / bright backgrounds under dark theme MUST reset their text color variables to dark for high contrast */
+[data-theme="dark"] .bg-\[\#D4FF00\],
+[data-theme="dark"] .bg-\[\#FFDE03\],
+[data-theme="dark"] .bg-\[\#4CCD99\],
+[data-theme="dark"] .bg-\[\#FF71CD\],
+[data-theme="dark"] .bg-\[\#CCFF00\],
+[data-theme="dark"] .bg-\[\#B2F9FC\],
+[data-theme="dark"] .bg-\[\#FF8A08\],
+[data-theme="dark"] .bg-\[\#FF6B6B\],
+[data-theme="dark"] .bg-\[\#25D366\],
+[data-theme="dark"] .bg-theme-accent,
+[data-theme="dark"] .bg-yellow,
+[data-theme="dark"] .bg-yellow-400,
+[data-theme="dark"] .bg-emerald-400,
+[data-theme="dark"] .bg-amber-400 {
+  --current-text-color: #000000 !important;
+  --current-text-secondary: #4b5563 !important;
+}
+
+/* Standard black text on bright background items is now black in dark theme */
+[data-theme="dark"] .bg-\[\#D4FF00\] *,
+[data-theme="dark"] .bg-\[\#FFDE03\] *,
+[data-theme="dark"] .bg-\[\#4CCD99\] *,
+[data-theme="dark"] .bg-\[\#FF71CD\] *,
+[data-theme="dark"] .bg-\[\#CCFF00\] *,
+[data-theme="dark"] .bg-\[\#B2F9FC\] *,
+[data-theme="dark"] .bg-\[\#FF8A08\] *,
+[data-theme="dark"] .bg-\[\#FF6B6B\] *,
+[data-theme="dark"] .bg-\[\#25D366\] *,
+[data-theme="dark"] .bg-theme-accent *,
+[data-theme="dark"] .bg-yellow-400 *,
+[data-theme="dark"] .bg-emerald-400 *,
+[data-theme="dark"] .bg-amber-400 * {
+  color: var(--current-text-color) !important;
+}
+
+/* Inherit / Map default dark-theme text classes to support custom context */
 [data-theme="dark"] h1,
 [data-theme="dark"] h2,
 [data-theme="dark"] h3,
@@ -75,80 +115,78 @@
 [data-theme="dark"] span,
 [data-theme="dark"] label,
 [data-theme="dark"] li,
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  color: var(--current-text-color);
+}
+
+/* Ensure common tailwind black and dark text classes adapt to background context */
 [data-theme="dark"] .text-black,
 [data-theme="dark"] .text-zinc-900,
-[data-theme="dark"] .text-gray-900 {
-  color: var(--text-color);
+[data-theme="dark"] .text-gray-900,
+[data-theme="dark"] .text-zinc-800,
+[data-theme="dark"] .text-zinc-700,
+[data-theme="dark"] .text-zinc-600 {
+  color: var(--current-text-color) !important;
 }
 
-/* Force dark text inside bright / light background elements for perfect contrast */
-[data-theme="dark"] .bg-[#D4FF00],
-[data-theme="dark"] .bg-[#FFDE03],
-[data-theme="dark"] .bg-[#4CCD99],
-[data-theme="dark"] .bg-[#ECE6D5],
-[data-theme="dark"] .bg-[#FF71CD],
-[data-theme="dark"] .bg-[#CCFF00],
-[data-theme="dark"] .bg-theme-accent,
-[data-theme="dark"] .bg-yellow-400,
-[data-theme="dark"] .bg-emerald-400,
-[data-theme="dark"] .bg-[#25D366],
-[data-theme="dark"] .bg-[#FF8A08],
-[data-theme="dark"] .bg-[#B2F9FC],
-[data-theme="dark"] .bg-[#FF6B6B],
+/* Map tailwind neutral/gray text classes to context secondary */
+[data-theme="dark"] .text-zinc-500,
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-zinc-400,
+[data-theme="dark"] .text-gray-400 {
+  color: var(--current-text-secondary) !important;
+}
+
+/* Map secondary bg surfaces to zinc-800 for dark-mode harmony */
 [data-theme="dark"] .bg-zinc-50,
 [data-theme="dark"] .bg-zinc-100,
-[data-theme="dark"] .bg-zinc-200,
-[data-theme="dark"] button:not(.bg-black):not(.bg-zinc-900):not(.bg-zinc-800),
-[data-theme="dark"] a:not(.bg-black):not(.bg-zinc-900):not(.bg-zinc-800) {
-  color: #000000 !important;
+[data-theme="dark"] .bg-zinc-200 {
+  background-color: #27272a !important; /* Zinc 800 */
 }
 
-[data-theme="dark"] .bg-[#D4FF00] *,
-[data-theme="dark"] .bg-[#FFDE03] *,
-[data-theme="dark"] .bg-[#4CCD99] *,
-[data-theme="dark"] .bg-[#ECE6D5] *,
-[data-theme="dark"] .bg-[#FF71CD] *,
-[data-theme="dark"] .bg-[#CCFF00] *,
-[data-theme="dark"] .bg-theme-accent *,
-[data-theme="dark"] .bg-yellow-400 *,
-[data-theme="dark"] .bg-emerald-400 *,
-[data-theme="dark"] .bg-[#25D366] *,
-[data-theme="dark"] .bg-[#FF8A08] *,
-[data-theme="dark"] .bg-[#B2F9FC] *,
-[data-theme="dark"] .bg-[#FF6B6B] *,
-[data-theme="dark"] .bg-zinc-50 *,
-[data-theme="dark"] .bg-zinc-100 *,
-[data-theme="dark"] .bg-zinc-200 *,
-[data-theme="dark"] button:not(.bg-black):not(.bg-zinc-900):not(.bg-zinc-800) *,
-[data-theme="dark"] a:not(.bg-black):not(.bg-zinc-900):not(.bg-zinc-800) * {
-  color: #000000 !important;
-}
-
-/* Subtle secondary gray text inside bright containers */
-[data-theme="dark"] .bg-[#D4FF00] .text-zinc-500,
-[data-theme="dark"] .bg-[#FFDE03] .text-zinc-500,
-[data-theme="dark"] .bg-theme-accent .text-zinc-500 {
-  color: #4b5563 !important;
-}
-
-/* Beautiful dark theme inputs/textareas/selects */
+/* Forms styling under dark theme */
 [data-theme="dark"] input,
 [data-theme="dark"] textarea,
 [data-theme="dark"] select {
-  background-color: #27272a !important; /* Zinc 800 */
+  background-color: #27272a !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
 }
-
 [data-theme="dark"] input::placeholder,
 [data-theme="dark"] textarea::placeholder {
-  color: #a1a1aa !important; /* Zinc 400 */
+  color: #a1a1aa !important;
 }
 
-/* Ensure borders are white in dark theme */
+/* Borders in dark theme should be white (brutal high contrast) */
 [data-theme="dark"] .border-black:not(button):not(a),
-[data-theme="dark"] [class*="border-"]:not([class*="border-[#"]):not([class*="border-transparent"]):not([class*="border-zinc-200"]):not(button):not(a) {
+[data-theme="dark"] [class*="border-"]:not([class*="border-[#"]):not([class*="border-transparent"]):not([class*="border-zinc-200"]):not([class*="border-zinc-300"]):not(button):not(a) {
   border-color: var(--border-color) !important;
+}
+
+/* Overriding hardcoded tailwind inline box shadows to have white neo-brutalist border glow */
+[data-theme="dark"] .shadow-\[1px_1px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[2px_2px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[3px_3px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[4px_4px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[4px_4px_0_0_\#000000\],
+[data-theme="dark"] .shadow-\[5px_5px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[6px_6px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[8px_8px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[2px_2px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[4px_4px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[5px_5px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[6px_6px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\] {
+  box-shadow: 4px 4px 0px 0px var(--border-color) !important;
+}
+
+/* Specific button/interactive overrides */
+[data-theme="dark"] .bg-zinc-950,
+[data-theme="dark"] .bg-zinc-900,
+[data-theme="dark"] .bg-zinc-800,
+[data-theme="dark"] .bg-black {
+  --current-text-color: #ffffff !important;
 }
 
 [data-theme="orange"] {

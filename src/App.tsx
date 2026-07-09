@@ -1328,7 +1328,7 @@ export default function App() {
   };
 
   return (
-    <div style={rootStyles} className="min-h-screen pb-32 select-none relative font-sans text-black">
+    <div style={rootStyles} className="min-h-screen pb-32 select-none relative font-sans text-[var(--text-color,black)]">
       {/* RETRO CRT DISPLAY SCANLINES EFFECT */}
       {isScanlineActive && <div className="retro-scanlines" />}
 
