@@ -40,7 +40,7 @@ export default function Card({
   const baseStyles = 'rounded-2xl transition-all select-none overflow-hidden';
   
   const variantStyles = {
-    white: 'bg-white text-black',
+    white: 'bg-[var(--card-bg)] text-[var(--text-color)]',
     krem: 'bg-[#ECE6D5] text-black',
     accent: 'bg-theme-accent text-black',
     yellow: 'bg-[#FFD100] text-black',
@@ -48,15 +48,15 @@ export default function Card({
   };
 
   const shadowStyles = {
-    sm: 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]',
-    md: 'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
-    lg: 'shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]'
+    sm: 'shadow-[2px_2px_0px_0px_var(--border-color,rgba(0,0,0,1))]',
+    md: 'shadow-[4px_4px_0px_0px_var(--border-color,rgba(0,0,0,1))]',
+    lg: 'shadow-[6px_6px_0px_0px_var(--border-color,rgba(0,0,0,1))]'
   };
 
-  const borderThickness = thickness === 'border-2' ? 'border-2 border-black' : thickness === 'border-4' ? 'border-4 border-black' : 'border-3 border-black';
+  const borderThickness = thickness === 'border-2' ? 'border-2 border-[var(--border-color,black)]' : thickness === 'border-4' ? 'border-4 border-[var(--border-color,black)]' : 'border-3 border-[var(--border-color,black)]';
 
   const hoverEffect = hasHoverEffect
-    ? 'hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]'
+    ? 'hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_0px_var(--border-color,rgba(0,0,0,1))]'
     : '';
 
   return (

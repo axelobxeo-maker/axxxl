@@ -61,6 +61,29 @@
   --border-color: #FFFFFF;
 }
 
+/* Smart Global Dark Theme overrides for hardcoded light classes */
+[data-theme="dark"] .bg-white:not(button):not(a):not(.bg-theme-accent):not([class*="bg-[#"]):not([class*="bg-emerald"]):not([class*="bg-green"]):not([class*="bg-yellow"]):not([class*="bg-pink"]):not([class*="bg-amber"]):not([class*="bg-orange"]) {
+  background-color: var(--card-bg) !important;
+}
+
+/* Ensure text elements in dark theme are white, excluding bright colored buttons, badges or highlights */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] p,
+[data-theme="dark"] .text-black:not(button):not(a):not(.bg-theme-accent):not([class*="bg-[#"]):not([class*="bg-yellow"]):not([class*="bg-green"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not([class*="bg-orange"]):not([class*="bg-pink"]),
+[data-theme="dark"] .text-zinc-900:not(button):not(a),
+[data-theme="dark"] .text-gray-900:not(button):not(a) {
+  color: var(--text-color) !important;
+}
+
+/* Ensure borders are white in dark theme */
+[data-theme="dark"] .border-black:not(button):not(a),
+[data-theme="dark"] [class*="border-"]:not([class*="border-[#"]):not([class*="border-transparent"]):not([class*="border-zinc-200"]):not(button):not(a) {
+  border-color: var(--border-color) !important;
+}
+
 [data-theme="orange"] {
   --bg-color: #DB7C18;
   --accent-color: #FFF200;
