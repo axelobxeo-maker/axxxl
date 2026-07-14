@@ -597,6 +597,17 @@ export default function App() {
     localStorage.setItem('axel_theme', currentTheme);
   }, [currentTheme]);
 
+  // Apply dynamic background style variables to document element for body reference
+  useEffect(() => {
+    const bgImage = webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'none';
+    const themeBgImage = `url('${currentWallpaper}')`;
+    const bgImageCurrent = webBackgroundImage !== 'none' ? bgImage : themeBgImage;
+    
+    document.documentElement.style.setProperty('--theme-bg-image', themeBgImage);
+    document.documentElement.style.setProperty('--custom-bg-image', bgImage);
+    document.documentElement.style.setProperty('--bg-image-current', bgImageCurrent);
+  }, [currentWallpaper, webBackgroundImage]);
+
   // Apply custom layout style variables
   const rootStyles = {
     '--border-radius-lg': customBorderRadius,

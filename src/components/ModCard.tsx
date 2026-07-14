@@ -285,22 +285,22 @@ export default function ModCard({
           </motion.div>
 
           {/* Quick Rating Stars */}
-          <div className="bg-zinc-50 border-2 border-black p-2 rounded-xl text-center">
-            <span className="text-[9px] font-bold text-gray-500 uppercase block mb-1">Rating Modifikasi</span>
+          <div className="bg-white/5 border border-white/15 p-2.5 rounded-xl text-center backdrop-blur-md">
+            <span className="text-[9px] font-black text-white/50 uppercase block mb-1">Rating Modifikasi</span>
             <div className="flex justify-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
                   onClick={() => handleRatingSubmit(star)}
-                  className={`text-sm transition-transform hover:scale-125 ${
-                    star <= (userRating || mod.rating || 5) ? 'text-yellow-400 font-extrabold' : 'text-gray-300'
+                  className={`text-sm transition-transform hover:scale-125 cursor-pointer ${
+                    star <= (userRating || mod.rating || 5) ? 'text-yellow-400 font-extrabold' : 'text-white/20'
                   }`}
                 >
                   ★
                 </button>
               ))}
             </div>
-            <span className="text-[8px] font-extrabold text-gray-400 flex items-center justify-center gap-0.5 mt-1">
+            <span className="text-[8px] font-extrabold text-white/60 flex items-center justify-center gap-0.5 mt-1">
               <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
               <span>{mod.rating?.toFixed(1) || '5.0'} / 5.0 ({mod.ratingsCount || 1} Rating)</span>
             </span>

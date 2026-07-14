@@ -198,25 +198,19 @@ input::placeholder, textarea::placeholder {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 
-/* Ensure perfect typography contrast on glass backgrounds */
-h1, h2, h3, h4, h5, h6, p, span, label, li {
+/* Ensure perfect typography contrast on glass backgrounds, unless they have specific text color utility classes */
+h1:not([class*="text-"]), 
+h2:not([class*="text-"]), 
+h3:not([class*="text-"]), 
+h4:not([class*="text-"]), 
+h5:not([class*="text-"]), 
+h6:not([class*="text-"]), 
+p:not([class*="text-"]), 
+span:not([class*="text-"]), 
+label:not([class*="text-"]), 
+li:not([class*="text-"]) {
   color: #FFFFFF;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-}
-
-/* Specific overrides to allow custom colors and button text inheritance */
-button, button span, button p,
-a, a span, a p,
-.text-black, .text-black span, .text-black p, .text-black h4,
-.text-emerald-300, .text-emerald-300 span, .text-emerald-400, .text-emerald-400 span,
-.text-amber-300, .text-amber-300 span, .text-amber-400, .text-amber-400 span,
-.text-pink-300, .text-pink-300 span, .text-pink-400, .text-pink-400 span,
-.text-red-300, .text-red-300 span, .text-red-400, .text-red-400 span,
-.text-blue-300, .text-blue-300 span,
-.text-indigo-300, .text-indigo-300 span,
-.text-sky-300, .text-sky-300 span {
-  color: inherit !important;
-  text-shadow: none !important;
 }
 
 /* Light Mode (putih theme) specific overrides for glass panels and text contrast */
