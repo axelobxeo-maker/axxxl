@@ -28,39 +28,26 @@
   --theme-bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
 }
 
-[data-theme="green"] {
-  --bg-color: #0f1a14;
-  --accent-color: #CCFF00;
-  --accent-dark: #1F4000;
-  --theme-bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
-}
-
-[data-theme="pink"] {
-  --bg-color: #1a0f16;
-  --accent-color: #00E4FF;
-  --accent-dark: #00889F;
-  --theme-bg-image: url('https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=1920&auto=format&fit=crop');
-}
-
-[data-theme="mint"] {
-  --bg-color: #0c171d;
-  --accent-color: #a35eff;
-  --accent-dark: #5008A2;
-  --theme-bg-image: url('https://images.unsplash.com/photo-1618005154425-4fc14dae6df3?q=80&w=1920&auto=format&fit=crop');
+[data-theme="putih"] {
+  --bg-color: #f3f4f6;
+  --accent-color: #2563eb;
+  --accent-dark: #1e3a8a;
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --text-color: #111827;
+  --border-color: rgba(17, 24, 39, 0.15);
+  --current-text-color: #111827;
+  --current-text-secondary: rgba(17, 24, 39, 0.65);
 }
 
 [data-theme="dark"] {
   --bg-color: #070708;
-  --accent-color: #39FF14;
-  --accent-dark: #1FAF0E;
-  --theme-bg-image: url('https://images.unsplash.com/photo-1752440093057-1c188e7137e9?q=80&w=1920&auto=format&fit=crop');
-}
-
-[data-theme="orange"] {
-  --bg-color: #1a1008;
-  --accent-color: #FF8A08;
-  --accent-dark: #A59B00;
-  --theme-bg-image: url('https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1920&auto=format&fit=crop');
+  --accent-color: #10b981;
+  --accent-dark: #065f46;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --text-color: #FFFFFF;
+  --border-color: rgba(255, 255, 255, 0.25);
+  --current-text-color: #FFFFFF;
+  --current-text-secondary: rgba(255, 255, 255, 0.7);
 }
 
 body {
@@ -168,18 +155,18 @@ body::before {
 /* --- BUTTON OVERRIDES --- */
 
 .brutal-btn, .brutal-btn-sm {
-  background: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(8px) saturate(160%) !important;
   border: 1px solid rgba(255, 255, 255, 0.38) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   transform: none !important;
-  color: #FFFFFF !important;
+  color: #FFFFFF;
 }
 
 .brutal-btn:hover:not(:disabled), .brutal-btn-sm:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.22);
   border-color: rgba(255, 255, 255, 0.55) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15) !important;
@@ -217,9 +204,85 @@ h1, h2, h3, h4, h5, h6, p, span, label, li {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
+/* Specific overrides to allow custom colors and button text inheritance */
+button, button span, button p,
+a, a span, a p,
+.text-black, .text-black span, .text-black p, .text-black h4,
+.text-emerald-300, .text-emerald-300 span, .text-emerald-400, .text-emerald-400 span,
+.text-amber-300, .text-amber-300 span, .text-amber-400, .text-amber-400 span,
+.text-pink-300, .text-pink-300 span, .text-pink-400, .text-pink-400 span,
+.text-red-300, .text-red-300 span, .text-red-400, .text-red-400 span,
+.text-blue-300, .text-blue-300 span,
+.text-indigo-300, .text-indigo-300 span,
+.text-sky-300, .text-sky-300 span {
+  color: inherit !important;
+  text-shadow: none !important;
+}
+
+/* Light Mode (putih theme) specific overrides for glass panels and text contrast */
+[data-theme="putih"] h1, 
+[data-theme="putih"] h2, 
+[data-theme="putih"] h3, 
+[data-theme="putih"] h4, 
+[data-theme="putih"] h5, 
+[data-theme="putih"] h6, 
+[data-theme="putih"] p, 
+[data-theme="putih"] span, 
+[data-theme="putih"] label, 
+[data-theme="putih"] li {
+  color: #111827;
+  text-shadow: none;
+}
+
+[data-theme="putih"] body::before {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="putih"] .crystal-panel,
+[data-theme="putih"] .brutal-card,
+[data-theme="putih"] .brutal-card-sm,
+[data-theme="putih"] [class*="bg-white"]:not(button):not(a):not(.bg-theme-accent) {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(16px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
+  border-color: rgba(17, 24, 39, 0.15) !important;
+  color: #111827 !important;
+  box-shadow: 
+    0 1px 0px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 32px -8px rgba(0, 0, 0, 0.06),
+    0 16px 48px -12px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="putih"] .crystal-panel:hover,
+[data-theme="putih"] .brutal-card:hover,
+[data-theme="putih"] .brutal-card-sm:hover {
+  background: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(17, 24, 39, 0.25) !important;
+}
+
+[data-theme="putih"] input, 
+[data-theme="putih"] textarea, 
+[data-theme="putih"] select {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(17, 24, 39, 0.15) !important;
+  color: #111827 !important;
+}
+
+[data-theme="putih"] input::placeholder, 
+[data-theme="putih"] textarea::placeholder {
+  color: rgba(17, 24, 39, 0.5) !important;
+}
+
 /* Subtitles or secondary text on glass */
 .text-zinc-500, .text-gray-500, .text-zinc-400, .text-gray-400 {
   color: rgba(255, 255, 255, 0.65) !important;
+}
+
+[data-theme="putih"] .text-zinc-500, 
+[data-theme="putih"] .text-gray-500, 
+[data-theme="putih"] .text-zinc-400, 
+[data-theme="putih"] .text-gray-400 {
+  color: rgba(17, 24, 39, 0.6) !important;
 }
 
 /* Keep brand/accent text colored beautifully */

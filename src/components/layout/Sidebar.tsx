@@ -24,7 +24,17 @@ interface SidebarProps {
   onEasterEggTap: () => void;
   isAdminMode: boolean;
   onToggleAdmin: () => void;
+  wallpaper: string;
+  onChangeWallpaper: (url: string) => void;
 }
+
+const WALLPAPERS = [
+  { id: 'aurora', name: 'Midnight Aurora', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop', color: '#10B981' },
+  { id: 'silk', name: 'Rose Silk', url: 'https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=1920&auto=format&fit=crop', color: '#EC4899' },
+  { id: 'lavender', name: 'Cosmic Lavender', url: 'https://images.unsplash.com/photo-1618005154425-4fc14dae6df3?q=80&w=1920&auto=format&fit=crop', color: '#8B5CF6' },
+  { id: 'space', name: 'Deep Space', url: 'https://images.unsplash.com/photo-1752440093057-1c188e7137e9?q=80&w=1920&auto=format&fit=crop', color: '#3B82F6' },
+  { id: 'sunset', name: 'Warm Sunset', url: 'https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1920&auto=format&fit=crop', color: '#F97316' }
+];
 
 // IconWrapper: Sleek glassmorphic tile for sidebar icons
 const IconWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -55,6 +65,8 @@ export default function Sidebar({
   onEasterEggTap,
   isAdminMode,
   onToggleAdmin,
+  wallpaper,
+  onChangeWallpaper,
 }: SidebarProps) {
   if (!isOpen) return null;
 
@@ -140,13 +152,47 @@ export default function Sidebar({
               </h4>
               <div className="space-y-3.5 text-[9px]">
                 <div>
-                  <span className="block font-bold text-white/60 uppercase mb-1.5">Pilihan Warna Tema</span>
-                  <div className="flex items-center gap-2 bg-white/5 p-2 border border-white/15 rounded-xl">
-                    <button onClick={() => onChangeTheme('green')} className={`w-5 h-5 rounded-full bg-[#CCFF00] border border-white/30 cursor-pointer transition-all duration-200 ${theme === 'green' ? 'scale-125 ring-2 ring-[#CCFF00] ring-offset-2 ring-offset-black shadow-lg shadow-[#CCFF00]/40' : 'hover:scale-110'}`} title="Green" />
-                    <button onClick={() => onChangeTheme('pink')} className={`w-5 h-5 rounded-full bg-[#FF71CD] border border-white/30 cursor-pointer transition-all duration-200 ${theme === 'pink' ? 'scale-125 ring-2 ring-[#FF71CD] ring-offset-2 ring-offset-black shadow-lg shadow-[#FF71CD]/40' : 'hover:scale-110'}`} title="Pink" />
-                    <button onClick={() => onChangeTheme('mint')} className={`w-5 h-5 rounded-full bg-[#B2F9FC] border border-white/30 cursor-pointer transition-all duration-200 ${theme === 'mint' ? 'scale-125 ring-2 ring-[#B2F9FC] ring-offset-2 ring-offset-black shadow-lg shadow-[#B2F9FC]/40' : 'hover:scale-110'}`} title="Mint" />
-                    <button onClick={() => onChangeTheme('dark')} className={`w-5 h-5 rounded-full bg-[#121214] border border-white/30 cursor-pointer transition-all duration-200 ${theme === 'dark' ? 'scale-125 ring-2 ring-white ring-offset-2 ring-offset-black shadow-lg shadow-white/10' : 'hover:scale-110'}`} title="Dark" />
-                    <button onClick={() => onChangeTheme('orange')} className={`w-5 h-5 rounded-full bg-[#FF8A08] border border-white/30 cursor-pointer transition-all duration-200 ${theme === 'orange' ? 'scale-125 ring-2 ring-[#FF8A08] ring-offset-2 ring-offset-black shadow-lg shadow-[#FF8A08]/40' : 'hover:scale-110'}`} title="Orange" />
+                  <span className="block font-bold text-white/60 uppercase mb-1.5">Pilihan Tema</span>
+                  <div className="flex gap-2 bg-white/5 p-1 border border-white/15 rounded-xl">
+                    <button
+                      onClick={() => onChangeTheme('putih')}
+                      className={`flex-1 py-1.5 font-bold border rounded-lg text-[10px] cursor-pointer transition-all duration-200 flex items-center justify-center gap-1 ${
+                        theme === 'putih'
+                          ? 'bg-white text-black shadow-md border-white'
+                          : 'bg-transparent border-transparent text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span>☀️ Putih</span>
+                    </button>
+                    <button
+                      onClick={() => onChangeTheme('dark')}
+                      className={`flex-1 py-1.5 font-bold border rounded-lg text-[10px] cursor-pointer transition-all duration-200 flex items-center justify-center gap-1 ${
+                        theme === 'dark'
+                          ? 'bg-white/20 border-white/30 text-white shadow-md'
+                          : 'bg-transparent border-transparent text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span>🌙 Dark</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="block font-bold text-white/60 uppercase mb-1.5">Pilihan Wallpaper / Background</span>
+                  <div className="flex items-center gap-2 bg-white/5 p-2 border border-white/15 rounded-xl justify-between">
+                    {WALLPAPERS.map((wp) => (
+                      <button
+                        key={wp.id}
+                        onClick={() => onChangeWallpaper(wp.url)}
+                        style={{ backgroundColor: wp.color }}
+                        className={`w-6 h-6 rounded-full border cursor-pointer transition-all duration-200 ${
+                          wallpaper === wp.url 
+                            ? 'scale-125 ring-2 ring-white ring-offset-2 ring-offset-black shadow-lg shadow-white/20' 
+                            : 'border-white/30 hover:scale-115'
+                        }`}
+                        title={wp.name}
+                      />
+                    ))}
                   </div>
                 </div>
 

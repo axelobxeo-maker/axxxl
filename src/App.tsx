@@ -179,9 +179,16 @@ export default function App() {
   const [voiceSearchActive, setVoiceSearchActive] = useState(false);
 
   // Dynamic Customizer Settings
-  const [currentTheme, setCurrentTheme] = useState('green');
+  const [currentTheme, setCurrentTheme] = useState('dark');
   const [customBorderRadius, setCustomBorderRadius] = useState('16px');
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
+  const [currentWallpaper, setCurrentWallpaper] = useState(() => {
+    return localStorage.getItem('axel_wallpaper') || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('axel_wallpaper', currentWallpaper);
+  }, [currentWallpaper]);
 
   // Interactive Premium Features States
   const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
@@ -499,10 +506,10 @@ export default function App() {
 
       // System Preferences / Automatic Theme
       const savedTheme = localStorage.getItem('axel_theme');
-      if (savedTheme) {
+      if (savedTheme === 'putih' || savedTheme === 'dark') {
         setCurrentTheme(savedTheme);
       } else {
-        setCurrentTheme('green');
+        setCurrentTheme('dark');
       }
 
       // Check maintenance status
@@ -598,15 +605,7 @@ export default function App() {
     '--shadow-offset': customShadowOffset,
     '--shadow-offset-sm': `calc(${customShadowOffset} - 2px)`,
     '--shadow-offset-lg': `calc(${customShadowOffset} + 2px)`,
-    '--theme-bg-image': currentTheme === 'pink'
-      ? "url('https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=1920&auto=format&fit=crop')"
-      : currentTheme === 'mint'
-      ? "url('https://images.unsplash.com/photo-1618005154425-4fc14dae6df3?q=80&w=1920&auto=format&fit=crop')"
-      : currentTheme === 'dark'
-      ? "url('https://images.unsplash.com/photo-1752440093057-1c188e7137e9?q=80&w=1920&auto=format&fit=crop')"
-      : currentTheme === 'orange'
-      ? "url('https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1920&auto=format&fit=crop')"
-      : "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop')",
+    '--theme-bg-image': `url('${currentWallpaper}')`,
     '--custom-bg-image': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'none',
     '--bg-image-current': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'var(--theme-bg-image)',
   } as React.CSSProperties;
@@ -1432,6 +1431,11 @@ export default function App() {
           const val = !isScanlineActive;
           setIsScanlineActive(val);
           writeToDB("scanline_active", val ? "true" : "false");
+          playSynth('click');
+        }}
+        wallpaper={currentWallpaper}
+        onChangeWallpaper={(url) => {
+          setCurrentWallpaper(url);
           playSynth('click');
         }}
         easterEggScore={easterEggScore}

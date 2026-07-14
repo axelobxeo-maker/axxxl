@@ -357,14 +357,16 @@ export default function ModCard({
             {/* Mirror Switcher if any extra mirrors exist */}
             {mod.mirrors && mod.mirrors.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[9px] font-extrabold text-gray-500 uppercase">PILIH SERVER:</span>
+                <span className="text-[9px] font-extrabold text-white/50 uppercase">PILIH SERVER:</span>
                 <button
                   onClick={() => {
                     soundPlay('click');
                     setSelectedMirror('primary');
                   }}
-                  className={`px-2 py-0.5 border-2 border-black rounded text-[9px] font-bold ${
-                    selectedMirror === 'primary' ? 'bg-theme-accent text-black' : 'bg-white text-zinc-600'
+                  className={`px-2.5 py-1 border rounded-lg text-[9px] font-bold cursor-pointer transition-all ${
+                    selectedMirror === 'primary' 
+                      ? 'bg-white/25 border-white/40 text-white shadow-md' 
+                      : 'bg-white/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   UTAMA (UNLIMITED)
@@ -376,8 +378,10 @@ export default function ModCard({
                       soundPlay('click');
                       setSelectedMirror(mir.name);
                     }}
-                    className={`px-2 py-0.5 border-2 border-black rounded text-[9px] font-bold ${
-                      selectedMirror === mir.name ? 'bg-theme-bg text-black' : 'bg-white text-zinc-600'
+                    className={`px-2.5 py-1 border rounded-lg text-[9px] font-bold cursor-pointer transition-all ${
+                      selectedMirror === mir.name 
+                        ? 'bg-white/25 border-white/40 text-white shadow-md' 
+                        : 'bg-white/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     MIRROR: {mir.name.toUpperCase()}
@@ -387,16 +391,16 @@ export default function ModCard({
             )}
 
             {/* Password Indicator */}
-            <div className="bg-zinc-50 border-2 border-black p-2 flex justify-between items-center text-[10px] font-bold rounded-lg relative overflow-hidden">
-              <span className="truncate pr-2 flex items-center gap-1">
-                <Key className="w-3.5 h-3.5 text-theme-dark" />
-                <span>PASSWORD: {decryptedPassword}</span>
+            <div className="bg-white/5 border border-white/15 p-2.5 flex justify-between items-center text-[10px] font-bold rounded-xl relative overflow-hidden">
+              <span className="truncate pr-2 flex items-center gap-1.5">
+                <Key className="w-4 h-4 text-theme-accent" />
+                <span>PASSWORD: <span className="font-mono text-theme-accent">{decryptedPassword}</span></span>
               </span>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCopyPassword}
-                className="bg-[#FFF200] border-2 border-black px-2 py-1 text-[8px] font-extrabold uppercase hover:bg-yellow-300 rounded shrink-0 brutal-shadow-sm cursor-pointer"
+                className="bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-500/30 text-yellow-300 px-3 py-1 text-[9px] font-extrabold uppercase rounded-lg shrink-0 cursor-pointer transition-colors"
               >
                 {copiedPassword ? 'Tersalin!' : 'Salin Password'}
               </motion.button>
@@ -451,9 +455,13 @@ export default function ModCard({
                     soundPlay('success');
                     onLike(cardIndex);
                   }}
-                  className="bg-theme-bg px-2 py-1 border-2 border-black rounded text-black hover:bg-theme-accent flex items-center gap-1 cursor-pointer"
+                  className={`px-2 py-1.5 border rounded-xl flex items-center gap-1 cursor-pointer transition-all ${
+                    mod.likes && mod.likes > 0
+                      ? 'bg-red-500/25 border-red-500/40 text-red-300 shadow-md shadow-red-500/10'
+                      : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
+                  }`}
                 >
-                  <Heart className="w-3 h-3 text-black fill-black" />
+                  <Heart className={`w-3 h-3 ${mod.likes && mod.likes > 0 ? 'text-red-400 fill-red-400' : 'text-white'}`} />
                   <span>{mod.likes || 0} Like</span>
                 </motion.button>
                 {mod.videoUrl && (
@@ -464,11 +472,13 @@ export default function ModCard({
                       soundPlay('click');
                       setShowVideoPreview(!showVideoPreview);
                     }}
-                    className={`px-2 py-1 border-2 border-black rounded text-black flex items-center gap-1 transition-all cursor-pointer ${
-                      showVideoPreview ? 'bg-[#FF71CD]' : 'bg-[#FFF200] hover:bg-yellow-300'
+                    className={`px-2 py-1.5 border rounded-xl flex items-center gap-1 transition-all cursor-pointer ${
+                      showVideoPreview 
+                        ? 'bg-pink-500/25 border-pink-500/40 text-pink-300 shadow-md shadow-pink-500/10' 
+                        : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
                     }`}
                   >
-                    <Video className="w-3 h-3 text-black" />
+                    <Video className="w-3 h-3" />
                     <span>Video Preview</span>
                   </motion.button>
                 )}
@@ -476,28 +486,40 @@ export default function ModCard({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowComments(!showComments)}
-                  className="bg-zinc-100 px-2 py-1 border-2 border-black rounded text-black hover:bg-zinc-200 flex items-center gap-1 cursor-pointer"
+                  className={`px-2 py-1.5 border rounded-xl flex items-center gap-1 cursor-pointer transition-all ${
+                    showComments
+                      ? 'bg-emerald-500/25 border-emerald-500/40 text-emerald-300 shadow-md shadow-emerald-500/10'
+                      : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
+                  }`}
                 >
-                  <MessageSquare className="w-3 h-3 text-black" />
+                  <MessageSquare className="w-3 h-3" />
                   <span>Diskusi ({mod.comments?.length || 0})</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowChangelog(!showChangelog)}
-                  className="bg-zinc-100 px-2 py-1 border-2 border-black rounded text-black hover:bg-zinc-200 flex items-center gap-1 cursor-pointer"
+                  className={`px-2 py-1.5 border rounded-xl flex items-center gap-1 cursor-pointer transition-all ${
+                    showChangelog
+                      ? 'bg-amber-500/25 border-amber-500/40 text-amber-300 shadow-md shadow-amber-500/10'
+                      : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
+                  }`}
                 >
-                  <History className="w-3 h-3 text-black" />
+                  <History className="w-3 h-3" />
                   <span>Riwayat Versi</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowQRCode(!showQRCode)}
-                  className="bg-zinc-100 px-2 py-1 border-2 border-black rounded text-black hover:bg-zinc-200 flex items-center gap-1 cursor-pointer"
+                  className={`px-2 py-1.5 border rounded-xl flex items-center gap-1 cursor-pointer transition-all ${
+                    showQRCode
+                      ? 'bg-blue-500/25 border-blue-500/40 text-blue-300 shadow-md shadow-blue-500/10'
+                      : 'bg-white/10 hover:bg-white/20 border-white/15 text-white/80 hover:text-white'
+                  }`}
                   title="Unduh dengan Kode QR"
                 >
-                  <QrCode className="w-3 h-3 text-black" />
+                  <QrCode className="w-3 h-3" />
                   <span>QR</span>
                 </motion.button>
                 <motion.button
@@ -507,10 +529,10 @@ export default function ModCard({
                     soundPlay('success');
                     onReportBroken(cardIndex);
                   }}
-                  className="bg-red-50 text-red-600 px-2 py-1 border-2 border-black rounded hover:bg-red-100 flex items-center gap-1 cursor-pointer"
+                  className="bg-red-500/15 text-red-400 hover:bg-red-500/25 border border-red-500/25 px-2 py-1.5 rounded-xl flex items-center gap-1 cursor-pointer transition-all"
                   title="Laporkan link rusak atau mati"
                 >
-                  <AlertTriangle className="w-3 h-3 text-red-600" />
+                  <AlertTriangle className="w-3 h-3 text-red-400" />
                   <span>Lapor Mati ({(mod.brokenReportCount || 0)})</span>
                 </motion.button>
               </div>
@@ -518,19 +540,19 @@ export default function ModCard({
 
             {/* QR Code Panel */}
             {showQRCode && (
-              <div className="p-3 bg-zinc-50 border-2 border-black rounded-xl text-center flex flex-col items-center justify-center space-y-2">
-                <h5 className="font-syne font-extrabold text-[10px] uppercase">Scan Kode QR untuk Unduh di Android</h5>
+              <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl text-center flex flex-col items-center justify-center space-y-2.5">
+                <h5 className="font-syne font-extrabold text-[10px] uppercase text-white">Scan Kode QR untuk Unduh di Android</h5>
                 <img
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${encodeURIComponent(getActiveDownloadUrl())}`}
                   alt="QR Download"
-                  className="w-28 h-28 border-2 border-black p-1 bg-white rounded-lg shadow-sm"
+                  className="w-28 h-28 border border-white/20 p-1 bg-white rounded-lg shadow-md"
                 />
-                <p className="text-[8px] text-gray-500 font-bold max-w-xs leading-normal">
+                <p className="text-[8px] text-white/60 font-bold max-w-xs leading-normal">
                   Pindai menggunakan kamera handphone atau aplikasi scan QR untuk langsung membuka file unduhan tanpa kabel data!
                 </p>
                 <button
                   onClick={() => setShowQRCode(false)}
-                  className="text-[9px] uppercase font-bold text-red-500 underline"
+                  className="text-[9px] uppercase font-extrabold text-red-400 hover:text-red-300 transition-colors bg-transparent border-none outline-none cursor-pointer"
                 >
                   Sembunyikan QR Code
                 </button>
@@ -539,12 +561,12 @@ export default function ModCard({
 
             {/* Video Preview Panel */}
             {showVideoPreview && mod.videoUrl && (
-              <div className="p-3 bg-zinc-50 border-2 border-black rounded-xl space-y-2">
-                <h5 className="font-syne font-extrabold text-[10px] uppercase border-b-2 border-black pb-1 flex justify-between items-center">
+              <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl space-y-2.5">
+                <h5 className="font-syne font-extrabold text-[10px] uppercase border-b border-white/10 pb-2 flex justify-between items-center text-white">
                   <span>Video Preview / Gameplay</span>
-                  <button onClick={() => setShowVideoPreview(false)} className="text-red-500 hover:underline text-[9px] lowercase bg-transparent border-none outline-none cursor-pointer">Tutup ✕</button>
+                  <button onClick={() => setShowVideoPreview(false)} className="text-red-400 hover:text-red-300 text-[9px] lowercase bg-transparent border-none outline-none cursor-pointer">Tutup ✕</button>
                 </h5>
-                <div className="relative w-full border-2 border-black overflow-hidden rounded-xl bg-black aspect-video">
+                <div className="relative w-full border border-white/15 overflow-hidden rounded-xl bg-black aspect-video">
                   {(() => {
                     const embedUrl = getYouTubeEmbedUrl(mod.videoUrl);
                     if (embedUrl) {
@@ -568,14 +590,14 @@ export default function ModCard({
                       );
                     } else {
                       return (
-                        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-900 text-white gap-2">
+                        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-zinc-950 text-white gap-2">
                           <Video className="w-8 h-8 text-yellow-400 animate-pulse" />
                           <span className="text-[10px] font-bold uppercase">Video Link Eksternal Tersedia</span>
                           <a 
                             href={mod.videoUrl} 
                             target="_blank" 
                             rel="noreferrer"
-                            className="bg-[#FFF200] text-black border-2 border-black px-3 py-1 font-extrabold text-[9px] uppercase rounded-lg shadow-sm animate-bounce"
+                            className="bg-yellow-500/25 hover:bg-yellow-500/35 border border-yellow-500/30 text-yellow-300 px-4 py-1.5 font-extrabold text-[9px] uppercase rounded-lg shadow-sm animate-bounce"
                           >
                             Buka Video Preview ↗
                           </a>
@@ -589,38 +611,38 @@ export default function ModCard({
 
             {/* Version History / Changelog Panel */}
             {showChangelog && (
-              <div className="p-3 bg-zinc-50 border-2 border-black rounded-xl space-y-2 text-xs">
-                <h5 className="font-syne font-extrabold text-[10px] uppercase border-b-2 border-black pb-1">
+              <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl space-y-2.5 text-xs">
+                <h5 className="font-syne font-extrabold text-[10px] uppercase border-b border-white/10 pb-1.5 text-white">
                   Changelog & Riwayat Versi
                 </h5>
                 <div className="text-[10px] space-y-2 max-h-32 overflow-y-auto pr-1">
                   <div>
-                    <span className="font-extrabold text-[#2E8B6E]">Versi Terakhir (Aktif):</span>
-                    <p className="text-[9px] text-gray-600 bg-white p-1 border rounded mt-0.5 font-medium">
+                    <span className="font-extrabold text-emerald-400">Versi Terakhir (Aktif):</span>
+                    <p className="text-[9px] text-white/80 bg-white/5 p-2 border border-white/10 rounded-lg mt-1 font-medium">
                       {mod.changelog || 'Mendukung versi update game terbaru di Play Store, perbaikan kestabilan performa, & optimalisasi anti-banned.'}
                     </p>
                   </div>
 
                   {mod.versionHistory && mod.versionHistory.length > 0 ? (
-                    <div className="border-t border-gray-300 pt-1.5 space-y-1">
-                      <span className="font-extrabold">Riwayat Versi Terdahulu:</span>
+                    <div className="border-t border-white/10 pt-1.5 space-y-1">
+                      <span className="font-extrabold text-white">Riwayat Versi Terdahulu:</span>
                       {mod.versionHistory.map((v, idx) => (
-                        <div key={idx} className="bg-white p-1.5 border rounded border-black/40 text-[9px] text-gray-500">
-                          <div className="flex justify-between items-center font-bold">
+                        <div key={idx} className="bg-white/5 p-1.5 border border-white/10 rounded text-[9px] text-white/70">
+                          <div className="flex justify-between items-center font-bold text-white/90">
                             <span>Versi {v.version}</span>
                             <span>{v.date}</span>
                           </div>
-                          <p className="font-medium mt-0.5">{v.changelog}</p>
+                          <p className="font-medium mt-0.5 text-white/60">{v.changelog}</p>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="text-[8px] italic text-gray-400">Belum ada riwayat versi sebelumnya.</div>
+                    <div className="text-[8px] italic text-white/40">Belum ada riwayat versi sebelumnya.</div>
                   )}
                 </div>
                 <button
                   onClick={() => setShowChangelog(false)}
-                  className="text-[9px] uppercase font-bold text-red-500 underline"
+                  className="text-[9px] uppercase font-bold text-red-400 hover:text-red-300 transition-colors bg-transparent border-none outline-none cursor-pointer"
                 >
                   Tutup Riwayat
                 </button>
@@ -628,13 +650,13 @@ export default function ModCard({
             )}
 
             {/* Sharing Panel */}
-            <div className="flex flex-col gap-2 bg-zinc-50 p-2.5 border-2 border-black rounded-lg">
-              <span className="text-[9px] font-black text-gray-500 uppercase block tracking-wider">Bagikan Modifikasi Ini:</span>
+            <div className="flex flex-col gap-2.5 bg-white/5 p-3.5 border border-white/15 rounded-xl">
+              <span className="text-[10px] font-black text-white/50 uppercase block tracking-wider">Bagikan Modifikasi Ini:</span>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full">
                 {/* Copy Link */}
                 <button
                   onClick={handleCopyLink}
-                  className="bg-[#D4FF00] border-2 border-black text-black px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md"
+                  className="bg-lime-500/20 hover:bg-lime-500/30 border border-lime-500/25 text-lime-300 px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1.5 cursor-pointer rounded-lg transition-all"
                 >
                   <Link strokeWidth={2.5} className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                   <span>{copiedLink ? 'Copied!' : 'Copy'}</span>
@@ -645,7 +667,7 @@ export default function ModCard({
                   href={whatsappShare}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] border-2 border-black text-black px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                  className="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/25 text-[#49e281] px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1.5 cursor-pointer rounded-lg transition-all text-center"
                 >
                   <span className="shrink-0 font-sans">🟢</span>
                   <span>WhatsApp</span>
@@ -656,7 +678,7 @@ export default function ModCard({
                   href={telegramShare}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#0088cc] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                  className="bg-[#0088cc]/20 hover:bg-[#0088cc]/30 border border-[#0088cc]/25 text-[#54c0f5] px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1.5 cursor-pointer rounded-lg transition-all text-center"
                 >
                   <span className="shrink-0 font-sans">🔵</span>
                   <span>Telegram</span>
@@ -667,7 +689,7 @@ export default function ModCard({
                   href={facebookShare}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1877F2] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                  className="bg-[#1877F2]/20 hover:bg-[#1877F2]/30 border border-[#1877F2]/25 text-[#6fa3ef] px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase flex items-center justify-center gap-1.5 cursor-pointer rounded-lg transition-all text-center"
                 >
                   <span className="shrink-0 font-sans">👥</span>
                   <span>Facebook</span>
@@ -678,7 +700,7 @@ export default function ModCard({
                   href={twitterShare}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1DA1F2] border-2 border-black text-white px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase col-span-2 sm:col-span-1 flex items-center justify-center gap-1 cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none rounded-md text-center"
+                  className="bg-[#1DA1F2]/20 hover:bg-[#1DA1F2]/30 border border-[#1DA1F2]/25 text-[#60beeb] px-2 py-1.5 text-[9px] sm:text-xs font-extrabold uppercase col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 cursor-pointer rounded-lg transition-all text-center"
                 >
                   <span className="shrink-0 font-sans">🐦</span>
                   <span>Twitter</span>
@@ -688,23 +710,23 @@ export default function ModCard({
 
             {/* Discussion / Comment Section Panel */}
             {showComments && (
-              <div className="bg-zinc-50 border-2 border-black p-3 text-black rounded-xl space-y-3">
-                <h4 className="font-syne font-extrabold text-[9px] uppercase border-b-2 border-black pb-1">
+              <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl space-y-3">
+                <h4 className="font-syne font-extrabold text-[10px] uppercase border-b border-white/10 pb-1.5 text-white">
                   Diskusi & Pertanyaan Member
                 </h4>
                 
                 {/* Comments List */}
-                <div className="max-h-36 overflow-y-auto space-y-1.5 bg-white p-2 border-2 border-black rounded-lg">
+                <div className="max-h-36 overflow-y-auto space-y-1.5 bg-white/5 p-2.5 border border-white/10 rounded-xl">
                   {!mod.comments || mod.comments.length === 0 ? (
-                    <p className="text-[9px] italic text-gray-400 text-center py-4">Belum ada diskusi. Jadilah yang pertama berkomentar!</p>
+                    <p className="text-[9px] italic text-white/40 text-center py-4">Belum ada diskusi. Jadilah yang pertama berkomentar!</p>
                   ) : (
                     mod.comments.map((comment, idx) => (
-                      <div key={idx} className="p-1.5 border-b border-black last:border-0 text-[10px] leading-relaxed">
+                      <div key={idx} className="p-2 border-b border-white/5 last:border-0 text-[10px] leading-relaxed">
                         <div className="flex justify-between items-center mb-0.5">
-                          <span className="font-extrabold text-[#2E8B6E]">@{comment.name}</span>
-                          <span className="text-[8px] text-gray-400 font-bold">{comment.timestamp}</span>
+                          <span className="font-extrabold text-emerald-400">@{comment.name}</span>
+                          <span className="text-[8px] text-white/40 font-bold">{comment.timestamp}</span>
                         </div>
-                        <p className="font-semibold text-gray-800">{comment.text}</p>
+                        <p className="font-medium text-white/95">{comment.text}</p>
                       </div>
                     ))
                   )}
@@ -718,7 +740,7 @@ export default function ModCard({
                       value={commentName}
                       onChange={(e) => setCommentName(e.target.value)}
                       placeholder="Nama Anda..."
-                      className="p-1.5 font-bold border-2 border-black rounded bg-white text-black text-[10px]"
+                      className="px-2.5 py-1.5 font-bold rounded-xl text-[10px]"
                       required
                     />
                     <input
@@ -726,15 +748,15 @@ export default function ModCard({
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
                       placeholder="Tulis pesan..."
-                      className="sm:col-span-2 p-1.5 font-bold border-2 border-black rounded bg-white text-black text-[10px]"
+                      className="sm:col-span-2 px-2.5 py-1.5 font-bold rounded-xl text-[10px]"
                       required
                     />
                   </div>
                   <button
                     type="submit"
-                    className="bg-[#2E8B6E] text-white text-[9px] font-extrabold px-3 py-1.5 border-2 border-black brutal-shadow-sm brutal-btn-sm rounded uppercase active:translate-y-0.5 flex items-center justify-center gap-1"
+                    className="bg-emerald-500/25 hover:bg-emerald-500/35 border border-emerald-500/30 text-emerald-300 text-[9px] font-extrabold px-3.5 py-2 rounded-xl uppercase flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
                   >
-                    <Send className="w-3 h-3 text-white" />
+                    <Send className="w-3 h-3 text-emerald-300" />
                     <span>Kirim Komentar</span>
                   </button>
                 </form>
