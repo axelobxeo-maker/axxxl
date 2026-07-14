@@ -5,13 +5,13 @@ import { Link } from 'lucide-react';
 export function ShareButton() {
   const handleCopy = () => {
     navigator.clipboard.writeText('https://axeluf.portal/download-mod-slug');
-    alert('Copied link!');
+    alert('Copied!');
   };
 
   return (
     <button
       onClick={handleCopy}
-      className="bg-white/15 hover:bg-white/25 text-white border border-white/35 px-3 py-1.5 text-[10px] sm:text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-lg hover:translate-y-[-1px] select-none rounded-xl backdrop-blur-md"
+      className="bg-[#D4FF00] border-2 border-black text-black px-3 py-1.5 text-[10px] sm:text-xs font-extrabold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none rounded-lg"
     >
       <Link strokeWidth={2.5} className="w-3.5 h-3.5 shrink-0" />
       <span>SHARE</span>
@@ -37,29 +37,31 @@ export default function Card({
   hasHoverEffect = true,
   ...props
 }: CardProps) {
-  const baseStyles = 'rounded-2xl transition-all duration-300 select-none overflow-hidden backdrop-blur-xl saturate-[190%] border';
+  const baseStyles = 'rounded-2xl transition-all select-none overflow-hidden';
   
   const variantStyles = {
-    white: 'bg-white/10 dark:bg-black/20 text-white border-white/25 dark:border-white/10',
-    krem: 'bg-amber-100/10 dark:bg-amber-100/5 text-white border-amber-100/20 dark:border-white/10',
-    accent: 'bg-theme-accent/15 text-white border-theme-accent/30 dark:border-white/10',
-    yellow: 'bg-amber-400/15 text-white border-amber-400/30 dark:border-white/10',
-    black: 'bg-black/30 dark:bg-black/50 text-white border-white/15 dark:border-white/10'
+    white: 'bg-[var(--card-bg)] text-[var(--text-color)]',
+    krem: 'bg-[#ECE6D5] text-black',
+    accent: 'bg-theme-accent text-black',
+    yellow: 'bg-[#FFD100] text-black',
+    black: 'bg-black text-white'
   };
 
   const shadowStyles = {
-    sm: 'shadow-md',
-    md: 'shadow-xl',
-    lg: 'shadow-2xl'
+    sm: 'shadow-[2px_2px_0px_0px_var(--border-color,rgba(0,0,0,1))]',
+    md: 'shadow-[4px_4px_0px_0px_var(--border-color,rgba(0,0,0,1))]',
+    lg: 'shadow-[6px_6px_0px_0px_var(--border-color,rgba(0,0,0,1))]'
   };
 
+  const borderThickness = thickness === 'border-2' ? 'border-2 border-[var(--border-color,black)]' : thickness === 'border-4' ? 'border-4 border-[var(--border-color,black)]' : 'border-3 border-[var(--border-color,black)]';
+
   const hoverEffect = hasHoverEffect
-    ? 'hover:-translate-y-1 hover:bg-white/20 dark:hover:bg-black/35 hover:border-white/40 dark:hover:border-white/20 hover:shadow-2xl'
+    ? 'hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_0px_var(--border-color,rgba(0,0,0,1))]'
     : '';
 
   return (
     <motion.div
-      className={`${baseStyles} ${variantStyles[variant]} ${shadowStyles[shadowSize]} ${hoverEffect} ${className}`}
+      className={`${baseStyles} ${variantStyles[variant]} ${borderThickness} ${shadowStyles[shadowSize]} ${hoverEffect} ${className}`}
       {...props}
     >
       {children}

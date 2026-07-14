@@ -179,16 +179,9 @@ export default function App() {
   const [voiceSearchActive, setVoiceSearchActive] = useState(false);
 
   // Dynamic Customizer Settings
-  const [currentTheme, setCurrentTheme] = useState('dark');
+  const [currentTheme, setCurrentTheme] = useState('green');
   const [customBorderRadius, setCustomBorderRadius] = useState('16px');
   const [customShadowOffset, setCustomShadowOffset] = useState('6px');
-  const [currentWallpaper, setCurrentWallpaper] = useState(() => {
-    return localStorage.getItem('axel_wallpaper') || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('axel_wallpaper', currentWallpaper);
-  }, [currentWallpaper]);
 
   // Interactive Premium Features States
   const [currentTab, setCurrentTab] = useState<'home' | 'mods'>('home');
@@ -506,10 +499,10 @@ export default function App() {
 
       // System Preferences / Automatic Theme
       const savedTheme = localStorage.getItem('axel_theme');
-      if (savedTheme === 'putih' || savedTheme === 'dark') {
+      if (savedTheme) {
         setCurrentTheme(savedTheme);
       } else {
-        setCurrentTheme('dark');
+        setCurrentTheme('green');
       }
 
       // Check maintenance status
@@ -597,17 +590,6 @@ export default function App() {
     localStorage.setItem('axel_theme', currentTheme);
   }, [currentTheme]);
 
-  // Apply dynamic background style variables to document element for body reference
-  useEffect(() => {
-    const bgImage = webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'none';
-    const themeBgImage = `url('${currentWallpaper}')`;
-    const bgImageCurrent = webBackgroundImage !== 'none' ? bgImage : themeBgImage;
-    
-    document.documentElement.style.setProperty('--theme-bg-image', themeBgImage);
-    document.documentElement.style.setProperty('--custom-bg-image', bgImage);
-    document.documentElement.style.setProperty('--bg-image-current', bgImageCurrent);
-  }, [currentWallpaper, webBackgroundImage]);
-
   // Apply custom layout style variables
   const rootStyles = {
     '--border-radius-lg': customBorderRadius,
@@ -616,9 +598,7 @@ export default function App() {
     '--shadow-offset': customShadowOffset,
     '--shadow-offset-sm': `calc(${customShadowOffset} - 2px)`,
     '--shadow-offset-lg': `calc(${customShadowOffset} + 2px)`,
-    '--theme-bg-image': `url('${currentWallpaper}')`,
     '--custom-bg-image': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'none',
-    '--bg-image-current': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'var(--theme-bg-image)',
   } as React.CSSProperties;
 
   // PWA Prompt trigger
@@ -1442,11 +1422,6 @@ export default function App() {
           const val = !isScanlineActive;
           setIsScanlineActive(val);
           writeToDB("scanline_active", val ? "true" : "false");
-          playSynth('click');
-        }}
-        wallpaper={currentWallpaper}
-        onChangeWallpaper={(url) => {
-          setCurrentWallpaper(url);
           playSynth('click');
         }}
         easterEggScore={easterEggScore}

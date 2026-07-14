@@ -1,314 +1,375 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Lexend:wght@500;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-syne: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-syne: "Space Grotesk", "Lexend", "Syne", sans-serif;
   --color-theme-bg: var(--bg-color);
   --color-theme-accent: var(--accent-color);
   --color-theme-dark: var(--accent-dark);
 }
 
 :root {
-  --bg-color: #0d121a;
+  --bg-color: #F3F3F3;
   --accent-color: #FFD100;
   --accent-dark: #000000;
-  --card-bg: rgba(255, 255, 255, 0.08);
-  --text-color: #FFFFFF;
-  --border-color: rgba(255, 255, 255, 0.25);
-  --border-radius-lg: 20px;
-  --border-radius-md: 16px;
-  --border-radius-sm: 10px;
-  --shadow-offset: 0px;
-  --shadow-offset-sm: 0px;
-  --shadow-offset-lg: 0px;
+  --card-bg: #FFFFFF;
+  --text-color: #000000;
+  --border-color: #000000;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+  --border-radius-sm: 8px;
+  --shadow-offset: 6px;
+  --shadow-offset-sm: 4px;
+  --shadow-offset-lg: 8px;
   --custom-bg-image: none;
-  --current-text-color: #FFFFFF;
-  --current-text-secondary: rgba(255, 255, 255, 0.7);
-  --theme-bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
+  --current-text-color: #000000;
+  --current-text-secondary: #6b7280;
 }
 
-[data-theme="putih"] {
-  --bg-color: #f3f4f6;
-  --accent-color: #2563eb;
-  --accent-dark: #1e3a8a;
-  --card-bg: rgba(255, 255, 255, 0.45);
-  --text-color: #111827;
-  --border-color: rgba(17, 24, 39, 0.15);
-  --current-text-color: #111827;
-  --current-text-secondary: rgba(17, 24, 39, 0.65);
+[data-theme="green"] {
+  --bg-color: #ECE6D5;
+  --accent-color: #CCFF00;
+  --accent-dark: #1F4000;
+  --card-bg: #FFFFFF;
+  --text-color: #000000;
+  --border-color: #000000;
+}
+
+[data-theme="pink"] {
+  --bg-color: #E299B7;
+  --accent-color: #00E4FF;
+  --accent-dark: #00889F;
+  --card-bg: #FFFFFF;
+  --text-color: #0C0C0C;
+  --border-color: #000000;
+}
+
+[data-theme="mint"] {
+  --bg-color: #A2E1E3;
+  --accent-color: #7913E6;
+  --accent-dark: #5008A2;
+  --card-bg: #FFFFFF;
+  --text-color: #0C0C0C;
+  --border-color: #000000;
 }
 
 [data-theme="dark"] {
-  --bg-color: #070708;
-  --accent-color: #10b981;
-  --accent-dark: #065f46;
-  --card-bg: rgba(255, 255, 255, 0.08);
+  --bg-color: #121214;
+  --accent-color: #39FF14;
+  --accent-dark: #1FAF0E;
+  --card-bg: #1E1E24;
   --text-color: #FFFFFF;
-  --border-color: rgba(255, 255, 255, 0.25);
+  --border-color: #FFFFFF;
   --current-text-color: #FFFFFF;
-  --current-text-secondary: rgba(255, 255, 255, 0.7);
+  --current-text-secondary: #a1a1aa;
+}
+
+/* Override standard bg-white to card-bg under dark theme */
+[data-theme="dark"] .bg-white:not(button):not(a):not(.bg-theme-accent):not([class*="bg-[#"]):not([class*="bg-emerald"]):not([class*="bg-green"]):not([class*="bg-yellow"]):not([class*="bg-pink"]):not([class*="bg-amber"]):not([class*="bg-orange"]) {
+  background-color: var(--card-bg) !important;
+}
+
+/* Light / bright backgrounds under dark theme MUST reset their text color variables to dark for high contrast */
+[data-theme="dark"] .bg-\[\#D4FF00\],
+[data-theme="dark"] .bg-\[\#FFDE03\],
+[data-theme="dark"] .bg-\[\#4CCD99\],
+[data-theme="dark"] .bg-\[\#FF71CD\],
+[data-theme="dark"] .bg-\[\#CCFF00\],
+[data-theme="dark"] .bg-\[\#B2F9FC\],
+[data-theme="dark"] .bg-\[\#FF8A08\],
+[data-theme="dark"] .bg-\[\#FF6B6B\],
+[data-theme="dark"] .bg-\[\#25D366\],
+[data-theme="dark"] .bg-theme-accent,
+[data-theme="dark"] .bg-yellow,
+[data-theme="dark"] .bg-yellow-400,
+[data-theme="dark"] .bg-emerald-400,
+[data-theme="dark"] .bg-amber-400 {
+  --current-text-color: #000000 !important;
+  --current-text-secondary: #4b5563 !important;
+}
+
+/* Standard black text on bright background items is now black in dark theme */
+[data-theme="dark"] .bg-\[\#D4FF00\] *,
+[data-theme="dark"] .bg-\[\#FFDE03\] *,
+[data-theme="dark"] .bg-\[\#4CCD99\] *,
+[data-theme="dark"] .bg-\[\#FF71CD\] *,
+[data-theme="dark"] .bg-\[\#CCFF00\] *,
+[data-theme="dark"] .bg-\[\#B2F9FC\] *,
+[data-theme="dark"] .bg-\[\#FF8A08\] *,
+[data-theme="dark"] .bg-\[\#FF6B6B\] *,
+[data-theme="dark"] .bg-\[\#25D366\] *,
+[data-theme="dark"] .bg-theme-accent *,
+[data-theme="dark"] .bg-yellow-400 *,
+[data-theme="dark"] .bg-emerald-400 *,
+[data-theme="dark"] .bg-amber-400 * {
+  color: var(--current-text-color) !important;
+}
+
+/* Inherit / Map default dark-theme text classes to support custom context */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] label,
+[data-theme="dark"] li,
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  color: var(--current-text-color);
+}
+
+/* Ensure common tailwind black and dark text classes adapt to background context */
+[data-theme="dark"] .text-black,
+[data-theme="dark"] .text-zinc-900,
+[data-theme="dark"] .text-gray-900,
+[data-theme="dark"] .text-zinc-800,
+[data-theme="dark"] .text-zinc-700,
+[data-theme="dark"] .text-zinc-600 {
+  color: var(--current-text-color) !important;
+}
+
+/* Map tailwind neutral/gray text classes to context secondary */
+[data-theme="dark"] .text-zinc-500,
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-zinc-400,
+[data-theme="dark"] .text-gray-400 {
+  color: var(--current-text-secondary) !important;
+}
+
+/* Map secondary bg surfaces to zinc-800 for dark-mode harmony */
+[data-theme="dark"] .bg-zinc-50,
+[data-theme="dark"] .bg-zinc-100,
+[data-theme="dark"] .bg-zinc-200 {
+  background-color: #27272a !important; /* Zinc 800 */
+}
+
+/* Forms styling under dark theme */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: #27272a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #a1a1aa !important;
+}
+
+/* Borders in dark theme should be white (brutal high contrast) */
+[data-theme="dark"] .border-black:not(button):not(a),
+[data-theme="dark"] [class*="border-"]:not([class*="border-[#"]):not([class*="border-transparent"]):not([class*="border-zinc-200"]):not([class*="border-zinc-300"]):not(button):not(a) {
+  border-color: var(--border-color) !important;
+}
+
+/* Overriding hardcoded tailwind inline box shadows to have white neo-brutalist border glow */
+[data-theme="dark"] .shadow-\[1px_1px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[2px_2px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[3px_3px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[4px_4px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[4px_4px_0_0_\#000000\],
+[data-theme="dark"] .shadow-\[5px_5px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[6px_6px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[8px_8px_0px_0px_\#000000\],
+[data-theme="dark"] .shadow-\[2px_2px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[4px_4px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[5px_5px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\],
+[data-theme="dark"] .shadow-\[6px_6px_0px_0px_rgba\(0\2c 0\2c 0\2c 1\)\] {
+  box-shadow: 4px 4px 0px 0px var(--border-color) !important;
+}
+
+/* Specific button/interactive overrides */
+[data-theme="dark"] .bg-zinc-950,
+[data-theme="dark"] .bg-zinc-900,
+[data-theme="dark"] .bg-zinc-800,
+[data-theme="dark"] .bg-black {
+  --current-text-color: #ffffff !important;
+}
+
+[data-theme="orange"] {
+  --bg-color: #DB7C18;
+  --accent-color: #FFF200;
+  --accent-dark: #A59B00;
+  --card-bg: #FFFFFF;
+  --text-color: #0C0C0C;
+  --border-color: #000000;
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', 'Inter', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
   background-color: var(--bg-color);
-  background-image: var(--bg-image-current, var(--theme-bg-image));
+  background-image: var(--custom-bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: #FFFFFF;
-  transition: background-image 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.6s ease;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
-  position: relative;
-  min-height: 100vh;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.28); /* Extra ambient overlay layer for supreme typography contrast */
-  pointer-events: none;
-  z-index: -1;
+/* Neo Brutalist Styles */
+.brutal-border {
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
 }
-
-/* --- THE FORMULA FOR LIQUID GLASS (GLASSMORPHISM) --- */
-
-.crystal-panel,
-.brutal-card,
-.brutal-card-sm,
-[class*="bg-white"]:not(button):not(a):not(.bg-theme-accent):not([class*="bg-[#"]):not([class*="bg-emerald"]):not([class*="bg-green"]):not([class*="bg-yellow"]):not([class*="bg-pink"]):not([class*="bg-amber"]):not([class*="bg-orange"]):not(.toast-body) {
-  background: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(14px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(14px) saturate(190%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.32) !important;
-  box-shadow: 
-    0 1px 0px 0 rgba(255, 255, 255, 0.4) inset,
-    0 8px 32px -8px rgba(0, 0, 0, 0.15),
-    0 16px 48px -12px rgba(0, 0, 0, 0.1) !important;
-  border-radius: var(--border-radius-lg, 16px) !important;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transform: none !important;
-  color: #FFFFFF !important;
-}
-
-/* Glass Panel Hovers */
-.crystal-panel:hover,
-.brutal-card:hover,
-.brutal-card-sm:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
-  border-color: rgba(255, 255, 255, 0.48) !important;
-  box-shadow: 
-    0 1px 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 12px 36px -6px rgba(0, 0, 0, 0.22),
-    0 24px 56px -8px rgba(0, 0, 0, 0.16) !important;
-  transform: translateY(-2px) !important;
-}
-
-/* Dark Theme specific overrides for glass panels */
-[data-theme="dark"] .crystal-panel,
-[data-theme="dark"] .brutal-card,
-[data-theme="dark"] .brutal-card-sm,
-[data-theme="dark"] [class*="bg-white"]:not(button):not(a) {
-  background: rgba(0, 0, 0, 0.32) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 
-    0 1px 0px 0 rgba(255, 255, 255, 0.08) inset,
-    0 8px 32px -8px rgba(0, 0, 0, 0.4),
-    0 16px 48px -12px rgba(0, 0, 0, 0.3) !important;
-}
-
-[data-theme="dark"] .crystal-panel:hover,
-[data-theme="dark"] .brutal-card:hover,
-[data-theme="dark"] .brutal-card-sm:hover {
-  background: rgba(0, 0, 0, 0.45) !important;
-  border-color: rgba(255, 255, 255, 0.22) !important;
-}
-
-/* --- OVERRIDING SOLID BRUTALIST LINES AND SHADOWS --- */
-
-.brutal-border,
-.brutal-border-b,
-.brutal-border-sm,
-.brutal-border-md,
-.border-black,
-.border-3,
-.border-4,
-.border-2 {
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+@media (min-width: 640px) {
+  .brutal-border {
+    border-width: 3px;
+    border-radius: var(--border-radius-lg);
+  }
 }
 
 .brutal-border-b {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-bottom: 2px solid var(--border-color);
+}
+@media (min-width: 640px) {
+  .brutal-border-b {
+    border-bottom-width: 3px;
+  }
 }
 
-/* Redefining brutalist shadows with elegant diffused glows */
-.brutal-shadow,
-.brutal-shadow-sm,
-.brutal-shadow-lg,
-.shadow-brutal,
-.shadow-brutal-lg {
-  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.18) !important;
+.brutal-border-sm {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+@media (min-width: 640px) {
+  .brutal-border-sm {
+    border-width: 2px;
+  }
 }
 
-/* --- BUTTON OVERRIDES --- */
-
-.brutal-btn, .brutal-btn-sm {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(160%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.38) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transform: none !important;
-  color: #FFFFFF;
+.brutal-border-md {
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+@media (min-width: 640px) {
+  .brutal-border-md {
+    border-width: 3px;
+    border-radius: var(--border-radius-md);
+  }
 }
 
-.brutal-btn:hover:not(:disabled), .brutal-btn-sm:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.55) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15) !important;
+.brutal-shadow {
+  box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0px 0px var(--border-color);
+  border-radius: var(--border-radius-md);
+}
+@media (min-width: 640px) {
+  .brutal-shadow {
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+    border-radius: var(--border-radius-lg);
+  }
 }
 
-.brutal-btn:active:not(:disabled), .brutal-btn-sm:active:not(:disabled) {
-  transform: translateY(1px) scale(0.97) !important;
+.brutal-shadow-sm {
+  box-shadow: 2px 2px 0px 0px var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+@media (min-width: 640px) {
+  .brutal-shadow-sm {
+    box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0px 0px var(--border-color);
+  }
 }
 
-/* --- GENERAL FORM INPUT GLASS --- */
-input, textarea, select {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  color: #FFFFFF !important;
-  border-radius: 14px !important;
-  padding: 10px 14px !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  backdrop-filter: blur(8px) !important;
+.brutal-shadow-lg {
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+  border-radius: var(--border-radius-md);
+}
+@media (min-width: 640px) {
+  .brutal-shadow-lg {
+    box-shadow: var(--shadow-offset-lg) var(--shadow-offset-lg) 0px 0px var(--border-color);
+    border-radius: var(--border-radius-lg);
+  }
 }
 
-input:focus, textarea:focus, select:focus {
-  outline: none !important;
-  border-color: rgba(255, 255, 255, 0.55) !important;
-  background: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.12) !important;
+.brutal-btn {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  border-radius: var(--border-radius-md);
 }
 
-input::placeholder, textarea::placeholder {
-  color: rgba(255, 255, 255, 0.55) !important;
+.brutal-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-offset) + 1px) calc(var(--shadow-offset) + 1px) 0px 0px var(--border-color);
 }
 
-/* Ensure perfect typography contrast on glass backgrounds, unless they have specific text color utility classes */
-h1:not([class*="text-"]), 
-h2:not([class*="text-"]), 
-h3:not([class*="text-"]), 
-h4:not([class*="text-"]), 
-h5:not([class*="text-"]), 
-h6:not([class*="text-"]), 
-p:not([class*="text-"]), 
-span:not([class*="text-"]), 
-label:not([class*="text-"]), 
-li:not([class*="text-"]) {
-  color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+.brutal-btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px 0px var(--border-color);
 }
 
-/* Light Mode (putih theme) specific overrides for glass panels and text contrast */
-[data-theme="putih"] h1, 
-[data-theme="putih"] h2, 
-[data-theme="putih"] h3, 
-[data-theme="putih"] h4, 
-[data-theme="putih"] h5, 
-[data-theme="putih"] h6, 
-[data-theme="putih"] p, 
-[data-theme="putih"] span, 
-[data-theme="putih"] label, 
-[data-theme="putih"] li {
-  color: #111827;
-  text-shadow: none;
+.brutal-btn-sm {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  border-radius: var(--border-radius-sm);
 }
 
-[data-theme="putih"] body::before {
-  background: rgba(255, 255, 255, 0.35);
+.brutal-btn-sm:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: calc(var(--shadow-offset-sm) + 1px) calc(var(--shadow-offset-sm) + 1px) 0px 0px var(--border-color);
 }
 
-[data-theme="putih"] .crystal-panel,
-[data-theme="putih"] .brutal-card,
-[data-theme="putih"] .brutal-card-sm,
-[data-theme="putih"] [class*="bg-white"]:not(button):not(a):not(.bg-theme-accent) {
-  background: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(16px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
-  border-color: rgba(17, 24, 39, 0.15) !important;
-  color: #111827 !important;
-  box-shadow: 
-    0 1px 0px 0 rgba(255, 255, 255, 0.6) inset,
-    0 8px 32px -8px rgba(0, 0, 0, 0.06),
-    0 16px 48px -12px rgba(0, 0, 0, 0.04) !important;
+.brutal-btn-sm:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px var(--border-color);
 }
 
-[data-theme="putih"] .crystal-panel:hover,
-[data-theme="putih"] .brutal-card:hover,
-[data-theme="putih"] .brutal-card-sm:hover {
-  background: rgba(255, 255, 255, 0.65) !important;
-  border-color: rgba(17, 24, 39, 0.25) !important;
+.brutal-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0px 0px var(--border-color);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+@media (min-width: 640px) {
+  .brutal-card {
+    border-width: 3px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--border-color);
+  }
 }
 
-[data-theme="putih"] input, 
-[data-theme="putih"] textarea, 
-[data-theme="putih"] select {
-  background: rgba(255, 255, 255, 0.6) !important;
-  border: 1px solid rgba(17, 24, 39, 0.15) !important;
-  color: #111827 !important;
+.brutal-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: calc(var(--shadow-offset-sm) + 1px) calc(var(--shadow-offset-sm) + 1px) 0px 0px var(--border-color);
+}
+@media (min-width: 640px) {
+  .brutal-card:hover {
+    box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px 0px var(--border-color);
+  }
 }
 
-[data-theme="putih"] input::placeholder, 
-[data-theme="putih"] textarea::placeholder {
-  color: rgba(17, 24, 39, 0.5) !important;
+.brutal-card-sm {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0px 0px var(--border-color);
 }
 
-/* Subtitles or secondary text on glass */
-.text-zinc-500, .text-gray-500, .text-zinc-400, .text-gray-400 {
-  color: rgba(255, 255, 255, 0.65) !important;
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-2px, -1px) rotate(-0.5deg); }
+  30% { transform: translate(1px, 2px) rotate(0.5deg); }
+  50% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  70% { transform: translate(2px, -1px) rotate(0.5deg); }
+  90% { transform: translate(-1px, 2px) rotate(0deg); }
 }
 
-[data-theme="putih"] .text-zinc-500, 
-[data-theme="putih"] .text-gray-500, 
-[data-theme="putih"] .text-zinc-400, 
-[data-theme="putih"] .text-gray-400 {
-  color: rgba(17, 24, 39, 0.6) !important;
+.shake {
+  animation: shake 0.3s ease-in-out;
 }
 
-/* Keep brand/accent text colored beautifully */
-.text-theme-accent, .text-[#D4FF00], .text-[#A3FFD6], .text-[#FF71CD], .text-[#B2F9FC], .text-[#CCFF00], .text-[#FFD100] {
-  color: var(--accent-color, #FFD100) !important;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
-}
-
-/* Custom scrollbar */
+/* Scrollbar customization */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--border-color);
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-/* iOS Emoji Font Family Enhancement */
-.font-emoji, .font-sans {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-}
-
-/* Custom styled iOS Emoji indicator rules */
-span.shrink-0.font-sans {
-  font-size: 1.15em;
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));
+  background: var(--accent-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
 }
 
 /* Marquee Ticker */
@@ -336,9 +397,9 @@ span.shrink-0.font-sans {
   width: 8px;
   height: 8px;
   background-color: var(--accent-color);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color);
   pointer-events: none;
-  border-radius: 50%;
+  border-radius: 2px;
   transform: translate(-50%, -50%);
   animation: spark-fade 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
   z-index: 9999;
@@ -357,9 +418,9 @@ span.shrink-0.font-sans {
 
 /* Skeleton animation */
 @keyframes skeleton-loading {
-  0% { background-color: rgba(255, 255, 255, 0.05); }
-  50% { background-color: rgba(255, 255, 255, 0.12); }
-  100% { background-color: rgba(255, 255, 255, 0.05); }
+  0% { background-color: rgba(0, 0, 0, 0.1); }
+  50% { background-color: rgba(0, 0, 0, 0.2); }
+  100% { background-color: rgba(0, 0, 0, 0.1); }
 }
 .skeleton {
   animation: skeleton-loading 1.5s infinite ease-in-out;
@@ -377,9 +438,9 @@ span.shrink-0.font-sans {
     rgba(0, 0, 0, 0.08) 50%
   ), linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.015),
-    rgba(255, 255, 255, 0.005),
-    rgba(255, 255, 255, 0.015)
+    rgba(255, 0, 0, 0.015),
+    rgba(0, 255, 0, 0.005),
+    rgba(0, 0, 255, 0.015)
   );
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
@@ -387,15 +448,18 @@ span.shrink-0.font-sans {
   opacity: 0.85;
 }
 
-@keyframes shake {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  10% { transform: translate(-2px, -1px) rotate(-0.5deg); }
-  30% { transform: translate(1px, 2px) rotate(0.5deg); }
-  50% { transform: translate(-1px, 1px) rotate(-0.5deg); }
-  70% { transform: translate(2px, -1px) rotate(0.5deg); }
-  90% { transform: translate(-1px, 2px) rotate(0deg); }
+@utility shadow-brutal {
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
 }
 
-.shake {
-  animation: shake 0.3s ease-in-out;
+@utility shadow-brutal-lg {
+  box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+}
+
+@utility shadow-brutal-hover {
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+    transform: translate(4px, 4px);
+  }
 }
