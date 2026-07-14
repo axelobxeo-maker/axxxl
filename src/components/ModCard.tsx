@@ -174,18 +174,18 @@ export default function ModCard({
       className="brutal-card overflow-hidden flex flex-col"
     >
       {/* OS Toolbar Frame */}
-      <div className="bg-black text-white px-3 py-2 flex items-center justify-between brutal-border-b font-mono text-[9px] select-none">
+      <div className="bg-white/15 dark:bg-black/35 text-white px-3 py-2 flex items-center justify-between border-b border-white/15 font-sans text-[9px] select-none rounded-t-2xl backdrop-blur-md">
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FF6B6B] border-2 border-black inline-block"></span>
-          <span className="w-2.5 h-2.5 rounded-full bg-[#A3FFD6] border-2 border-black inline-block"></span>
-          <span className="w-2.5 h-2.5 rounded-full bg-[#4CCD99] border-2 border-black inline-block"></span>
+          <span className="w-2 h-2 rounded-full bg-[#FF5F56] border border-white/20 inline-block shadow-sm"></span>
+          <span className="w-2 h-2 rounded-full bg-[#FFBD2E] border border-white/20 inline-block shadow-sm"></span>
+          <span className="w-2 h-2 rounded-full bg-[#27C93F] border border-white/20 inline-block shadow-sm"></span>
         </div>
         <div 
           onClick={() => {
             soundPlay('click');
             window.open(`${window.location.origin}/?modId=${mod.id || cardIndex}`, '_blank');
           }}
-          className="bg-zinc-900 border border-zinc-700 hover:border-zinc-400 rounded-full px-3 py-0.5 text-[9px] text-[#A3FFD6] font-extrabold truncate max-w-[120px] sm:max-w-xs cursor-pointer transition-all"
+          className="bg-white/10 dark:bg-black/30 border border-white/20 hover:border-white/40 rounded-full px-3 py-0.5 text-[9px] text-emerald-300 font-extrabold truncate max-w-[120px] sm:max-w-xs cursor-pointer transition-all"
           title="Buka Halaman Tunggal Mod Ini"
         >
           axeluf.co/mod-{mod.id || cardIndex} ↗
@@ -195,8 +195,8 @@ export default function ModCard({
             soundPlay('click');
             onToggleFavorite(cardIndex);
           }}
-          className={`font-extrabold text-xs transition-transform hover:scale-125 px-1 py-0.5 rounded ${
-            isFavorited ? 'text-yellow-400' : 'text-zinc-500'
+          className={`font-extrabold text-xs transition-transform hover:scale-125 px-1 py-0.5 rounded cursor-pointer ${
+            isFavorited ? 'text-yellow-400' : 'text-white/50 hover:text-white'
           }`}
           title={isFavorited ? 'Hapus Bookmark' : 'Simpan ke Bookmark'}
         >

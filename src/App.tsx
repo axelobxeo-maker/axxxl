@@ -598,7 +598,17 @@ export default function App() {
     '--shadow-offset': customShadowOffset,
     '--shadow-offset-sm': `calc(${customShadowOffset} - 2px)`,
     '--shadow-offset-lg': `calc(${customShadowOffset} + 2px)`,
+    '--theme-bg-image': currentTheme === 'pink'
+      ? "url('https://images.unsplash.com/photo-1618005198143-e5283b519a7f?q=80&w=1920&auto=format&fit=crop')"
+      : currentTheme === 'mint'
+      ? "url('https://images.unsplash.com/photo-1618005154425-4fc14dae6df3?q=80&w=1920&auto=format&fit=crop')"
+      : currentTheme === 'dark'
+      ? "url('https://images.unsplash.com/photo-1752440093057-1c188e7137e9?q=80&w=1920&auto=format&fit=crop')"
+      : currentTheme === 'orange'
+      ? "url('https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1920&auto=format&fit=crop')"
+      : "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop')",
     '--custom-bg-image': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'none',
+    '--bg-image-current': webBackgroundImage !== 'none' ? `url(${webBackgroundImage})` : 'var(--theme-bg-image)',
   } as React.CSSProperties;
 
   // PWA Prompt trigger
